@@ -1,0 +1,167 @@
+---
+/* Hero.astro mit Neural Network Effekt */
+---
+<section class="hero-wrapper" id="hero-section">
+  <div id="home" class="anchor-point"></div>
+
+  <div class="bg-layer">
+    <div class="fixed-bg-img"></div>
+    <div class="vignette"></div>
+    <canvas id="neural-canvas"></canvas>
+  </div>
+
+  <div class="hero-content-area">
+    <slot />
+  </div>
+</section>
+
+<script>
+  // ... DEIN JS BLEIBT EXAKT GLEICH ...
+  const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  let dots: any[] = []; // Vereinfacht für die Anzeige
+  const mouse = { x: -100, y: -100 };
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+  resize();
+
+  class Dot {
+    x: number; y: number; vx: number; vy: number; radius: number;
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      this.x += this.vx;
+      this.y += this.vy;
+    }
+    draw() {
+      if (!ctx) return;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#c6d300';
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    dots = [];
+    const count = (canvas.width * canvas.height) / 15000; 
+    for (let i = 0; i < count; i++) {
+      dots.push(new Dot());
+    }
+  }
+
+  function animate() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < dots.length; i++) {
+      const d1 = dots[i];
+      d1.update();
+      d1.draw();
+      for (let j = i + 1; j < dots.length; j++) {
+        const d2 = dots[j];
+        const dist = Math.hypot(d1.x - d2.x, d1.y - d2.y);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(d1.x, d1.y);
+          ctx.lineTo(d2.x, d2.y);
+          ctx.strokeStyle = `rgba(198, 211, 0, ${1 - dist / 150})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+      const distMouse = Math.hypot(d1.x - mouse.x, d1.y - mouse.y);
+      if (distMouse < 200) {
+        ctx.beginPath();
+        ctx.moveTo(d1.x, d1.y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(198, 211, 0, ${0.5 * (1 - distMouse / 200)})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  init();
+  animate();
+</script>
+
+<style>
+  /* DER FIX FÜR DEN ANKER */
+  .anchor-point {
+    position: absolute;
+    top: -150px; /* Dieser Wert schiebt den Zielpunkt nach oben, über die Navbar */
+    left: 0;
+    visibility: hidden;
+  }
+
+  .hero-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: visible;
+    padding-left: 15%;
+    background-color: #0a0f14;
+  }
+
+  .bg-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .fixed-bg-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+  }
+
+  #neural-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .vignette {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to right, #0a0f14 20%, transparent 80%),
+                radial-gradient(circle, transparent 10%, #0a0f14 90%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-content-area {
+    position: relative;
+    z-index: 10;
+  }
+</style>

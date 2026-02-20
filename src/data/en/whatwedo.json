@@ -1,0 +1,24 @@
+{
+  "title": "What We Do",
+  "subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
+  "items": [
+    {
+      "step": "01",
+      "title": "Sovereignty",
+      "title-sub": "Foundation",
+      "desc": "We deploy AI hardware to safeguard valuable assets. This architecture provides data isolation on a sovereign basis. You achieve control without external providers."
+    },
+    {
+      "step": "02",
+      "title": "AGENTIC",
+      "title-sub": "Intelligence",
+      "desc": "We engineer autonomous AI agents for operational efficiency. This sovereign operating system structures corporate knowledge. Secure execution protects your unique identity."
+    },
+    {
+      "step": "03",
+      "title": "STRATEGIC",
+      "title-sub": "Orchestration",
+      "desc": "We design frameworks to protect corporate identity. Your expertise and culture remain your greatest competitive advantages. You master your own evolution."
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+---
+/* src/components/Roadmap.astro */
+const { roadmapData } = Astro.props;
+
+const title = roadmapData?.title || "DEVELOPMENT ROADMAP";
+const subtitle = roadmapData?.subtitle || "THE PATH FORWARD";
+const steps = roadmapData?.steps || [];
+---
+
+<section class="roadmap-section" id="roadmap">
+  <div class="container roadmap-content-root">
+    
+    <div class="title-row">
+      <h2 class="section-title">{title}</h2>
+      <p class="section-title-sub">{subtitle}</p>
+    </div>
+
+    <div class="roadmap-horizontal-wrapper">
+      <div class="roadmap-scroll-area">
+        
+        <div class="roadmap-track">
+          <div class="main-axis"></div>
+          
+          <div class="steps-grid">
+            {steps.map((item, index) => (
+              <div class={`step-node ${index % 2 === 0 ? 'is-top' : 'is-bottom'}`}>
+                
+                <div class="phase-outline">{item.phase || `Q${index + 1}`}</div>
+
+                <div class="step-card">
+                  <div class="card-header">
+                    <span class="card-number">0{index + 1}</span>
+                    <h3 class="card-main-title">{item.title}</h3>
+                  </div>
+                  <p class="card-body-text">{item.desc}</p>
+                </div>
+
+                <div class="node-connection">
+                  <div class="connection-line"></div>
+                  <div class="solid-point">
+                    <span class="point-number-black">0{index + 1}</span>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --- BASIS STYLES (Desktop First) --- */
+  .roadmap-section {
+    position: relative;
+    padding: 100px 0;
+    width: 100%;
+    background: #0a0f14;
+    overflow: hidden;
+  }
+
+  .roadmap-content-root {
+    position: relative;
+    z-index: 10;
+  }
+
+  .title-row {
+    width: 100%;
+    padding-left: 10%;
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .section-title-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .roadmap-scroll-area {
+    overflow-x: auto;
+    padding: 100px 0;
+    cursor: grab;
+  }
+
+  .roadmap-track {
+    position: relative;
+    min-width: 1700px;
+    height: 850px;
+    display: flex;
+    align-items: center;
+  }
+
+  .main-axis {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    transform: translateY(-50%);
+    z-index: 5;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  }
+
+  .steps-grid {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+  }
+
+  .step-node {
+    position: relative;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .is-top { justify-content: flex-start; padding-top: 30px; }
+  .is-bottom { justify-content: flex-end; padding-bottom: 30px; }
+
+  /* KARTEN DESIGN */
+  .step-card {
+    position: relative;
+    background: #0d1217;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 2.5rem;
+    width: 340px;
+    z-index: 20;
+    transition: all 0.4s ease;
+  }
+
+  .card-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #fff; line-height: 0.9; margin: 0.5rem 0; text-transform: uppercase; }
+  .card-number { font-family: 'Bebas Neue', sans-serif; color: var(--accent); font-size: 1.4rem; }
+  .card-body-text { font-family: 'Lato', sans-serif; color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-top: 1.5rem; }
+
+  /* OUTLINE TEXT */
+  .phase-outline {
+    position: absolute;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 10rem;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+    z-index: 1;
+  }
+  .is-top .phase-outline { top: 0; transform: translateY(-10%); }
+  .is-bottom .phase-outline { bottom: 0; transform: translateY(10%); }
+
+  /* PUNKT & LINIE */
+  .node-connection {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+  }
+
+  .solid-point {
+    width: 60px; height: 60px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .point-number-black { color: #000; font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; font-weight: bold; }
+
+  .connection-line { position: absolute; width: 1px; background: var(--accent); }
+  .is-top .connection-line { top: 320px; bottom: 50%; background: linear-gradient(to bottom, transparent, var(--accent)); }
+  .is-bottom .connection-line { bottom: 320px; top: 50%; background: linear-gradient(to top, transparent, var(--accent)); }
+
+  /* --- MOBILE ANSICHT (Responsive) --- */
+  @media (max-width: 1024px) {
+    .roadmap-section { padding: 60px 20px; }
+    
+    .title-row { padding-left: 0; text-align: center; margin-bottom: 3rem; }
+
+    .roadmap-scroll-area {
+      overflow-x: visible;
+      padding: 0;
+    }
+
+    .roadmap-track {
+      min-width: 100%;
+      height: auto;
+      display: block; /* Kein Flex mehr */
+    }
+
+    .main-axis, .node-connection, .phase-outline {
+      display: none !important; /* Alles störende weg */
+    }
+
+    .steps-grid {
+      display: flex;
+      flex-direction: column; /* Stapeln */
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .step-node {
+      width: 100%;
+      height: auto;
+      padding: 0 !important;
+    }
+
+    .step-card {
+      width: 100%;
+      max-width: 500px; /* Begrenzung für bessere Lesbarkeit */
+      padding: 2rem;
+    }
+
+    .card-main-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

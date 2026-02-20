@@ -1,0 +1,65 @@
+---
+/* src/pages/de.astro */
+import "../styles/global.css";
+
+// 1. Hier laden wir die DEUTSCHEN Daten
+import teamData from '../data/de/team.json';
+import whatwedoData from '../data/de/whatwedo.json';
+import visionData from '../data/de/vision.json';
+import productDataDe from '../data/de/product.json';
+import roadmapData from '../data/de/roadmap.json';
+
+// 2. Komponenten importieren
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import WhoWeAre from "../components/WhoWeAre.astro"; 
+import WhatWeDoSection from '../components/WhatWeDo.astro';
+import Vision from '../components/Vision.astro';
+import Product from '../components/Product.astro';
+import Roadmap from '../components/Roadmap.astro';
+
+// 3. Sprache auf Deutsch setzen
+const lang = "de"; 
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGIRDY | Artificial General Intelligence Ready</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <Navbar lang={lang} />
+
+    <main>
+      <Hero>
+        <div class="hero" id="home">
+          <h1>
+            <span>Artificial</span>
+            <span>General</span>
+            <span class="accent">Intelligence</span>
+            <span>Ready</span>
+          </h1>
+
+          <h2>Philipp Feindert & Jan Junge</h2>
+
+          <a href="#contact" class="cta-link">
+            <button class="cta">Kontakt</button>
+          </a>
+        </div>
+      </Hero>
+
+      <WhoWeAre teamData={teamData} />
+      <WhatWeDoSection whatwedoData={whatwedoData} />
+      <Vision visionData={visionData} />
+      <Product productData={productDataDe} />
+      <Roadmap roadmapData={roadmapData} />
+      
+    </main>
+  </body>
+</html>

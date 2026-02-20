@@ -1,0 +1,169 @@
+---
+/* src/components/Navbar.astro */
+const { lang = 'en' } = Astro.props; 
+
+// Logik: Wenn wir auf Englisch sind, führt der Switcher zu /de. 
+// Wenn wir auf Deutsch sind (in de.astro), führt er zurück zur Home /.
+const targetPath = lang === 'en' ? '/de' : '/';
+---
+
+<nav class="navbar">
+  <div class="nav-container">
+
+    <div class="logo">
+      <a href={lang === 'en' ? '/' : '/de'}>
+        <img src="/Logo_weiss.png" alt="AGIRDY Logo" class="logo-img" />
+      </a>
+    </div>
+
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#who-we-are">{lang === 'en' ? 'WHO WE ARE' : 'WER WIR SIND'}</a></li>
+      <li><a href="#what-we-do">{lang === 'en' ? 'WHAT WE DO' : 'WAS WIR TUN'}</a></li>
+      <li><a href="#vision">{lang === 'en' ? 'VISION & MISSION' : 'VISION & MISSION'}</a></li>
+      <li><a href="#product">{lang === 'en' ? 'PRODUCT' : 'PRODUKT'}</a></li>
+      <li><a href="#roadmap">ROADMAP</a></li>
+      <li><a href="#contact" class="nav-cta">{lang === 'en' ? 'CONTACT' : 'KONTAKT'}</a></li>
+      
+      <li class="lang-switch-container">
+        <a href={targetPath} class="lang-link">
+          <span class={lang === 'de' ? 'active-lang' : ''}>DE</span>
+          <span class="sep">|</span>
+          <span class={lang === 'en' ? 'active-lang' : ''}>EN</span>
+        </a>
+      </li>
+    </ul>
+
+    <button class="menu-toggle" id="menu-btn" aria-label="Menu öffnen">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+
+  </div>
+</nav>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  const navbar = document.querySelector('.navbar');
+
+  function updateNavbarHeight() {
+    if (navbar) {
+      const height = (navbar as HTMLElement).offsetHeight;
+      document.documentElement.style.setProperty('--navbar-height', height + 'px');
+    }
+  }
+
+  updateNavbarHeight();
+  window.addEventListener('resize', updateNavbarHeight);
+
+  menuBtn?.addEventListener('click', () => {
+    menuBtn.classList.toggle('is-active');
+    navMenu?.classList.toggle('active');
+    document.body.style.overflow = navMenu?.classList.contains('active') ? 'hidden' : '';
+    updateNavbarHeight();
+  });
+
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      menuBtn?.classList.remove('is-active');
+      navMenu?.classList.remove('active');
+      document.body.style.overflow = '';
+      updateNavbarHeight();
+    });
+  });
+</script>
+
+<style>
+  /* Dein bestehendes CSS bleibt komplett erhalten */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 15, 20, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.2rem 0;
+  }
+
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .logo { z-index: 1100; }
+  .logo-img { height: 45px; transition: transform 0.3s ease; }
+  .logo-img:hover { transform: scale(1.05); }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* NEU: CSS für den Sprachumschalter */
+  .lang-switch-container {
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-link {
+    font-size: 0.75rem !important; /* Etwas kleiner als die anderen Links */
+    color: rgba(255,255,255,0.5) !important;
+    display: flex;
+    gap: 4px;
+  }
+
+  .active-lang {
+    color: var(--accent) !important;
+    font-weight: 900;
+  }
+
+  .sep {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  /* Burger & Mobile */
+  .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 20px; background: transparent; border: none; cursor: pointer; z-index: 1100; }
+  .line { width: 100%; height: 2px; background-color: var(--text); transition: all 0.3s ease; }
+
+  @media (max-width: 1100px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+      position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+      flex-direction: column; justify-content: center; background: rgba(10, 15, 20, 0.95);
+      transition: right 0.5s ease; z-index: 1050;
+    }
+    .nav-links.active { right: 0; }
+    .nav-links a { font-size: 1.8rem; }
+    .lang-link { font-size: 1.5rem !important; margin-top: 1rem; }
+    
+    .menu-toggle.is-active .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .menu-toggle.is-active .line:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+  }
+</style>

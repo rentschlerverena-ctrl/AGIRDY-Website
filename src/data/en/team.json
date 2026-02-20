@@ -1,0 +1,20 @@
+{
+  "title": "Who We Are",
+  "subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
+  "members": [
+    {
+      "name": "Philipp Feindert",
+      "role": "The Strategic Navigator",
+      "image": "/philipp.jpg",
+      "linkedin": "https://linkedin.com/in/philippfeindert",
+      "bio": "Hi, I’m Philipp. My focus is always the <strong>WHY</strong> and the <strong>WHERE</strong>. As a former AI forecast and AI strategy expert at the Research Department of Mercedes-Benz, I translate the exponential pace of artificial intelligence into clear and human centered guiding principles.."
+    },
+    {
+      "name": "Jan Junge",
+      "role": "The Technological Architect",
+      "image": "/jan.jpg",
+      "linkedin": "https://linkedin.com/in/philippfeindert",
+      "bio": "Hi, I am Jan.  My focus is always the <strong>HOW</strong> and the <strong>WHAT</strong>. As a former research and development engineer at the research department of Mercedes Benz, I transform complex technical innovation into reliable and industrial grade system."
+    }
+  ]
+}

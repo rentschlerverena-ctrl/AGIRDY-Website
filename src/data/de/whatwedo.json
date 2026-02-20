@@ -1,0 +1,24 @@
+{
+  "title": "Was wir tun",
+  "subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
+  "items": [
+    {
+      "step": "01",
+      "title": "Sovereignty",
+      "title-sub": "Foundation",
+      "desc": "Wir setzen KI-Hardware zum Schutz wertvoller Daten ein. Diese Architektur gewährleistet eine souveräne Datenisolation. Sie erhalten die volle Kontrolle ohne externe Anbieter."
+    },
+    {
+      "step": "02",
+      "title": "AGENTIC",
+      "title-sub": "Intelligence",
+      "desc": "Wir entwickeln autonome KI-Agenten für mehr operative Effizienz. Dieses souveräne Betriebssystem strukturiert das Unternehmenswissen. Sichere Ausführung schützt Ihre einzigartige Identität."
+    },
+    {
+      "step": "03",
+      "title": "STRATEGIC",
+      "title-sub": "Orchestration",
+      "desc": "Wir entwickeln Rahmenbedingungen zum Schutz der Unternehmensidentität. Ihre Expertise und Unternehmenskultur bleiben Ihre größten Wettbewerbsvorteile. Sie gestalten Ihre eigene Weiterentwicklung."
+    }
+  ]
+}

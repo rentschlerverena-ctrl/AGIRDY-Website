@@ -1,0 +1,10 @@
+{
+  "title": "Roadmap",
+  "subtitle": "The following milestones provide an insight into the 2026 roadmap to bring our AGIRDY vision to market readiness.",
+  "steps": [
+    { "phase": "Q2", "title": "MVP Release", "desc": "AGIRDY Agent#1 with core agent workflows for minutes, tasks and decision briefs.." },
+    { "phase": "Q3", "title": "Pilot Program", "desc": "Own on-prem hardware with AGIRDY Agent#1 in first enterprise POCs." },
+    { "phase": "Q4", "title": "Scaleable Deployments", "desc": "Standardized templates, industry packs and repeatable rollouts." },
+    { "phase": "Q1/2027", "title": "Expansion", "desc": "Global network scaling and enterprise API rollout." }
+  ]
+}

@@ -1,0 +1,206 @@
+---
+/* src/components/WhoWeAre.astro */
+const { teamData } = Astro.props; 
+
+// Kleiner Sicherheitstrick: Falls die Daten fehlen, zeigt er eine Warnung im Terminal
+if (!teamData) {
+  console.error("WhoWeAre: Keine teamData empfangen!");
+}
+---
+
+<section class="who-we-are" id="who-we-are">
+  <div class="container">
+<div class="title-row">
+        <h2 class="section-title">{teamData.title}</h2>
+        <p class="section-title-sub">{teamData.subtitle}</p>
+    </div>
+    
+    <div class="team-grid">
+      {teamData.members.map(member => (
+        <div class="member-card">
+          <div class="profile-image-container">
+            <div class="image-ring">
+              <img src={member.image} alt={member.name} class="profile-img" />
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <h1 class="accent">{member.name}</h1>
+            <p class="role">{member.role}</p>
+            <p class="bio" set:html={member.bio} />
+
+            {/* LinkedIn Link Integration */}
+            {member.linkedin && (
+              <a href={member.linkedin} target="_blank" rel="noopener noreferrer" class="social-link" aria-label={`LinkedIn Profil von ${member.name}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="social-icon">
+                  <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .who-we-are {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    padding: 120px 0;
+    background: transparent;
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+.title-row {
+    width: 100%;
+    padding-left: 15%; 
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3rem;
+    color: var(--text);
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1; /* Wichtig für den engen Abstand */
+  }
+
+  .section-title-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-top: 0.2rem; /* Von 0.5rem auf 0.2rem reduziert für Konsistenz */
+    opacity: 0.9;
+  }
+
+  .team-grid {
+    display: grid;
+    justify-content: center; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+    gap: 3rem;
+    padding: 0 5%; 
+  }
+
+  .member-card {
+    background: rgba(17, 24, 31, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .member-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .image-ring {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 100%);
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #0a0f14;
+  }
+
+
+  .accent {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--text);
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 0.9;
+  }
+
+  .role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; 
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 0rem;    /* Sicherstellen, dass kein Platz nach oben ist */
+    margin-bottom: 0.1rem; /* Der Abstand ZUM Bio-Text bleibt gleich */
+    color: var(--text);
+    opacity: 1;
+    line-height: 2;      /* Macht den Block kompakter */
+    color: var(--accent);
+  
+  }
+
+
+  .bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 1rem; /* Platz zum LinkedIn Icon */
+  }
+
+  .bio :global(strong) {
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    font-weight: normal; 
+  }
+
+/* LINKEDIN ICON STYLING - AKTUALISIERT */
+  .social-link {
+    display: flex; /* Nutzt Flex zum besseren Zentrieren des SVGs */
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem; /* Mehr Abstand nach oben für ein luftigeres Design */
+    transition: transform 0.2s ease;
+    text-decoration: none;
+  }
+
+  .social-icon {
+    width: 20px;  /* Von 28px auf 20px reduziert */
+    height: 20px; /* Von 28px auf 20px reduziert */
+    fill: var(--text);
+    opacity: 0.4; /* Etwas blasser im Ruhezustand für edleren Look */
+    transition: all 0.3s ease;
+  }
+
+  .social-link:hover .social-icon {
+    fill: var(--accent);
+    opacity: 1;
+    filter: drop-shadow(0 0 1px var(--accent));
+  }
+
+  .social-link:hover {
+    transform: translateY(1px); /* Schwebt beim Hover leicht nach oben */
+  }
+
+  @media (max-width: 768px) {
+    .title-row {
+      padding-left: 10%; 
+    }
+  }
+</style>

@@ -1,0 +1,20 @@
+{
+  "title": "Wer wir sind",
+  "subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
+  "members": [
+    {
+      "name": "Philipp Feindert",
+      "role": "The Strategic Navigator",
+      "image": "/philipp.jpg",
+      "linkedin": "https://linkedin.com/in/philippfeindert",
+      "bio": "Hi, ich bin Philipp und hier kommt mein deutscher text rein."
+    },
+    {
+      "name": "Jan Junge",
+      "role": "The Technological Architect",
+      "image": "/jan.jpg",
+      "linkedin": "https://linkedin.com/in/philippfeindert",
+      "bio": "Hi, ich bin Jan und hier kommt mein deutscher text rein"
+    }
+  ]
+}
