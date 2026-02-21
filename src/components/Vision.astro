@@ -2,14 +2,13 @@
 /* src/components/Vision.astro */
 const { visionData } = Astro.props; 
 
-// Sicherheits-Check
 if (!visionData) {
   console.error("Vision: Keine Daten empfangen!");
 }
 ---
 
 <section class="what-we-do" id="vision">
-<div class="container">
+  <div class="container">
     
     <div class="title-row">
         <h2 class="section-title">{visionData.title}</h2>
@@ -18,45 +17,45 @@ if (!visionData) {
 
     <div class="services-grid">
       
-      <div class="service-card">
+      <div class="card service-card">
         <div class="service-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         
         <div class="card-header">
-          <h3 class="service-title">{visionData?.vision?.label || "VISION"}</h3>
-          <p class="service-item-sub">The Future</p>
+          <h3 class="card-title">{visionData?.vision?.label || "VISION"}</h3>
+          <p class="card-subtitle">The Future</p>
         </div>
 
-        <p class="service-desc">{visionData?.vision?.text}</p>
+        <p class="card-desc">{visionData?.vision?.text}</p>
         <div class="accent-bar"></div>
       </div>
 
-      <div class="service-card">
+      <div class="card service-card">
         <div class="service-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
         
         <div class="card-header">
-          <h3 class="service-title">{visionData?.mission?.label || "MISSION"}</h3>
-          <p class="service-item-sub">The Path</p>
+          <h3 class="card-title">{visionData?.mission?.label || "MISSION"}</h3>
+          <p class="card-subtitle">The Path</p>
         </div>
 
-        <p class="service-desc">{visionData?.mission?.text}</p>
+        <p class="card-desc">{visionData?.mission?.text}</p>
         <div class="accent-bar"></div>
       </div>
 
-      <div class="service-card">
+      <div class="card service-card">
         <div class="service-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         
         <div class="card-header">
-          <h3 class="service-title">{visionData?.values?.label || "VALUES"}</h3>
-          <p class="service-item-sub">Our Core</p>
+          <h3 class="card-title">{visionData?.values?.label || "VALUES"}</h3>
+          <p class="card-subtitle">Our Core</p>
         </div>
 
-        <p class="service-desc">{visionData?.values?.text}</p>
+        <p class="card-desc">{visionData?.values?.text}</p>
         <div class="accent-bar"></div>
       </div>
 
@@ -65,7 +64,6 @@ if (!visionData) {
 </section>
 
 <style>
-  /* EXAKT DEINE WHAT-WE-DO STYLES */
   .what-we-do {
     position: relative;
     z-index: 20; 
@@ -82,30 +80,7 @@ if (!visionData) {
     z-index: 25;
   }
 
-.title-row {
-    width: 100%;
-    padding-left: 15%; 
-    margin-bottom: 5rem;
-  }
-
-  .section-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 3rem;
-    color: var(--text);
-    text-transform: uppercase;
-    margin: 0;
-    line-height: 1; /* Wichtig für den engen Abstand */
-  }
-
-  .section-title-sub {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-top: 0.2rem; /* Von 0.5rem auf 0.2rem reduziert für Konsistenz */
-    opacity: 0.9;
-  }
-
+  /* Grid Layout bleibt spezifisch */
   .services-grid {
     display: flex;
     flex-direction: row;
@@ -119,63 +94,19 @@ if (!visionData) {
   }
 
   .service-card {
-    position: relative;
     flex: 1;
     min-width: 300px;
-    background: rgba(17, 24, 31, 0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 3.5rem 2.5rem;
-    border-radius: 30px;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .service-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent);
-    background: rgba(17, 24, 31, 0.85);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    /* Die Basis-Card Styles kommen nun aus der global.css */
   }
 
   .service-icon {
     color: var(--accent);
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
   }
 
-  .card-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .service-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.8rem;
-    color: var(--text);
-    margin: 0;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    line-height: 0.9;
-  }
-
-  .service-item-sub {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem; 
-    letter-spacing: 1.5px;
-    color: var(--accent);
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
-    line-height: 2;
-  }
-
-  .service-desc {
-   font-size: 1rem;
-    line-height: 1.6;
-    color: var(--muted);
-    margin-top: auto; /* Schiebt Beschreibung nach unten */
-  }
-
+  /* Akzent-Linie am Boden als lokales Feature */
   .accent-bar {
     position: absolute;
     bottom: 0;
@@ -184,7 +115,7 @@ if (!visionData) {
     height: 3px;
     background: var(--accent);
     transition: width 0.4s ease;
-  }
+  }*/
 
   .service-card:hover .accent-bar {
     width: calc(100% - 5rem);
@@ -199,9 +130,6 @@ if (!visionData) {
     .service-card {
       width: 100%;
       max-width: 500px;
-    }
-    .title-row {
-      padding-left: 10%;
     }
   }
 </style>

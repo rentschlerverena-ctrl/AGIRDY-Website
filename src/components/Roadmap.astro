@@ -1,7 +1,6 @@
 ---
 /* src/components/Roadmap.astro */
 const { roadmapData } = Astro.props;
-
 const title = roadmapData?.title || "DEVELOPMENT ROADMAP";
 const subtitle = roadmapData?.subtitle || "THE PATH FORWARD";
 const steps = roadmapData?.steps || [];
@@ -27,18 +26,18 @@ const steps = roadmapData?.steps || [];
                 
                 <div class="phase-outline">{item.phase || `Q${index + 1}`}</div>
 
-                <div class="step-card">
+                <div class="card roadmap-step-card">
                   <div class="card-header">
-                    <span class="card-number">0{index + 1}</span>
-                    <h3 class="card-main-title">{item.title}</h3>
+                    <span class="card-subtitle">Phase 0{index + 1}</span>
+                    <h3 class="card-title" style="font-size: 2.2rem; line-height: 0.85;">{item.title}</h3>
                   </div>
-                  <p class="card-body-text">{item.desc}</p>
+                  <p class="card-desc">{item.desc}</p>
                 </div>
 
                 <div class="node-connection">
                   <div class="connection-line"></div>
-                  <div class="solid-point">
-                    <span class="point-number-black">0{index + 1}</span>
+                  <div class="roadmap-feature-badge">
+                    {index + 1}
                   </div>
                 </div>
 
@@ -53,53 +52,10 @@ const steps = roadmapData?.steps || [];
 </section>
 
 <style>
-  /* --- BASIS STYLES (Desktop First) --- */
   .roadmap-section {
     position: relative;
-    padding: 100px 0;
-    width: 100%;
-    background: #0a0f14;
-    overflow: hidden;
-  }
-
-  .roadmap-content-root {
-    position: relative;
+    padding: 120px 0;
     z-index: 10;
-  }
-
-  .title-row {
-    width: 100%;
-    padding-left: 15%;
-    margin-bottom: 5rem;
-  }
-
-  .section-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    color: #fff;
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .section-title-sub {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--accent);
-    letter-spacing: 2px;
-  }
-
-  .roadmap-scroll-area {
-    overflow-x: auto;
-    padding: 100px 0;
-    cursor: grab;
-  }
-
-  .roadmap-track {
-    position: relative;
-    min-width: 1700px;
-    height: 850px;
-    display: flex;
-    align-items: center;
   }
 
   .main-axis {
@@ -112,45 +68,121 @@ const steps = roadmapData?.steps || [];
     box-shadow: 0 0 15px var(--accent);
     transform: translateY(-50%);
     z-index: 5;
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  .roadmap-track {
+    position: relative;
+    /* Reduzierte min-width, damit die Karten nicht so weit auseinandergezogen werden */
+    min-width: 1200px; 
+    height: 800px;
+    display: flex;
+    align-items: center;
+    /* Zentriert den gesamten Track im Scrollbereich */
+    margin: 0 auto; 
   }
 
   .steps-grid {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    /* Breite begrenzt und zentriert für mehr Rand links/rechts */
+    width: 90%; 
+    max-width: 1400px;
+    margin: 0 auto;
     height: 100%;
+    align-items: center; 
   }
 
   .step-node {
     position: relative;
-    width: 380px;
+    width: 300px; /* Breite des Nodes leicht reduziert für kompaktere Optik */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .is-top { justify-content: flex-start; padding-top: 30px; }
-  .is-bottom { justify-content: flex-end; padding-bottom: 30px; }
+  .is-top { justify-content: flex-start; padding-top: 40px; }
+  .is-bottom { justify-content: flex-end; padding-bottom: 40px; }
 
-  /* KARTEN DESIGN */
-  .step-card {
-    position: relative;
-    background: #0d1217;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 2.5rem;
-    width: 340px;
+  /* --- KARTEN --- */
+  .roadmap-step-card {
+    width: 320px;
+    flex: none !important;
+    height: auto !important;
+    padding: 2.2rem;
     z-index: 20;
-    transition: all 0.4s ease;
+    background: rgba(17, 24, 31, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
-  .card-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #fff; line-height: 0.9; margin: 0.5rem 0; text-transform: uppercase; }
-  .card-number { font-family: 'Bebas Neue', sans-serif; color: var(--accent); font-size: 1.4rem; }
-  .card-body-text { font-family: 'Lato', sans-serif; color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin-top: 1.5rem; }
+  /* --- VERBINDUNG --- */
+  .node-connection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+  }
 
-  /* OUTLINE TEXT */
+  .connection-line {
+    width: 1px;
+    background: var(--accent);
+    height: 100%;
+  }
+
+  .is-top .node-connection {
+    justify-content: flex-end;
+    transform: translate(-50%, -100%);
+    top: 50%;
+  }
+  .is-top .connection-line {
+    background: linear-gradient(to top, var(--accent), transparent);
+  }
+
+  .is-bottom .node-connection {
+    justify-content: flex-start;
+    transform: translate(-50%, 0%);
+    top: 50%;
+  }
+  .is-bottom .connection-line {
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  /* --- BADGE --- */
+  .roadmap-feature-badge {
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 15;
+    box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+    flex-shrink: 0;
+    position: absolute;
+    bottom: -25px;
+  }
+
+  .is-bottom .roadmap-feature-badge {
+    bottom: auto;
+    top: -25px;
+  }
+
   .phase-outline {
     position: absolute;
     font-family: 'Archivo Black', sans-serif;
@@ -158,77 +190,15 @@ const steps = roadmapData?.steps || [];
     color: transparent;
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
     z-index: 1;
-  }
-  .is-top .phase-outline { top: 0; transform: translateY(-10%); }
-  .is-bottom .phase-outline { bottom: 0; transform: translateY(10%); }
-
-  /* PUNKT & LINIE */
-  .node-connection {
-    position: absolute;
-    top: 0; bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 15;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  .solid-point {
-    width: 60px; height: 60px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .point-number-black { color: #000; font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; font-weight: bold; }
-
-  .connection-line { position: absolute; width: 1px; background: var(--accent); }
-  .is-top .connection-line { top: 320px; bottom: 50%; background: linear-gradient(to bottom, transparent, var(--accent)); }
-  .is-bottom .connection-line { bottom: 320px; top: 50%; background: linear-gradient(to top, transparent, var(--accent)); }
-
-  /* --- MOBILE ANSICHT (Responsive) --- */
   @media (max-width: 1024px) {
-    .roadmap-section { padding: 60px 20px; }
-    
-    .title-row { padding-left: 0; text-align: center; margin-bottom: 3rem; }
-
-    .roadmap-scroll-area {
-      overflow-x: visible;
-      padding: 0;
-    }
-
-    .roadmap-track {
-      min-width: 100%;
-      height: auto;
-      display: block; /* Kein Flex mehr */
-    }
-
-    .main-axis, .node-connection, .phase-outline {
-      display: none !important; /* Alles störende weg */
-    }
-
-    .steps-grid {
-      display: flex;
-      flex-direction: column; /* Stapeln */
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .step-node {
-      width: 100%;
-      height: auto;
-      padding: 0 !important;
-    }
-
-    .step-card {
-      width: 100%;
-      max-width: 500px; /* Begrenzung für bessere Lesbarkeit */
-      padding: 2rem;
-    }
-
-    .card-main-title {
-      font-size: 2.5rem;
-    }
+    .roadmap-track { min-width: 100%; height: auto; display: block; }
+    .main-axis, .node-connection, .phase-outline { display: none !important; }
+    .steps-grid { flex-direction: column; gap: 3rem; align-items: center; padding: 40px 0; width: 100%; }
+    .step-node { width: 100%; height: auto; padding: 0 !important; }
+    .roadmap-step-card { width: 100%; max-width: 500px; }
   }
 </style>

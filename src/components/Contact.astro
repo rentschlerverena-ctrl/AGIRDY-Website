@@ -1,5 +1,5 @@
 ---
-/* 1. DATEN-IMPORT */
+/* src/components/Contact.astro */
 const { contactData } = Astro.props; 
 ---
 
@@ -12,28 +12,33 @@ const { contactData } = Astro.props;
     </div>
     
     <div class="contact-grid">
-      <article class="member-card">
-
-        <div class="icon-container">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            stroke-width="1.2" 
-            class="outline-mail-icon"
-          >
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-        </div>
+      <article class="card member-card">
         
-        <div class="card-content">
-          <h1 class="accent-name">{contactData.cardTitle}</h1>
-          <p class="role-text">{contactData.cardSubtitle}</p>
-          <p class="bio-text">{contactData.description}</p>
+        <div class="card-inner-content">
+          <div class="icon-container">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="1.2" 
+              class="outline-mail-icon"
+            >
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          
+          <div class="card-header" style="margin-bottom: 1rem;">
+            <h3 class="card-title" style="font-size: 2.5rem; margin: 0;">{contactData.cardTitle}</h3>
+            <p class="card-subtitle">{contactData.cardSubtitle}</p>
+          </div>
 
-          <div class="btn-wrapper">
+          <p class="card-desc">
+            {contactData.description}
+          </p>
+
+          <div class="btn-wrapper" style="margin-top: 1.5rem;">
             <a href={`mailto:${contactData.email}`} class="cta no-underline">
               {contactData.buttonText}
             </a>
@@ -41,26 +46,18 @@ const { contactData } = Astro.props;
 
           <div class="social-links-row">
             {contactData.socials.map(social => (
-              <a href={social.url} target="_blank" class="social-icon-link">
+              <a href={social.url} target="_blank" class="social-link" aria-label={social.platform}>
                 
                 {social.platform.toLowerCase() === 'linkedin' && (
-                  <svg viewBox="0 0 448 512" class="social-svg-icon">
-                    <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
-                  </svg>
+                  <svg viewBox="0 0 448 512" class="social-icon"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
                 )}
 
                 {social.platform.toLowerCase() === 'twitter' && (
-                  <svg viewBox="0 0 512 512" class="social-svg-icon">
-                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-                  </svg>
+                  <svg viewBox="0 0 512 512" class="social-icon"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
                 )}
 
                 {social.platform.toLowerCase() === 'instagram' && (
-                  <svg viewBox="0 0 448 512" class="social-svg-icon">
-                    <path d="M224.1 141c-43.6 0-79 35.4-79 79s35.4 79 79 79 79-35.4 79-79-35.4-79-79-79zm0 133.4c-30.1 0-54.5-24.4-54.5-54.5s24.4-54.5 54.5-54.5 54.5 24.4 54.5 54.5-24.4 54.5-54.5 54.5z"/>
-                    <path d="M448 158.7v194.6c0 52.3-42.4 94.7-94.7 94.7H158.7c-52.3 0-94.7-42.4-94.7-94.7V158.7c0-52.3 42.4-94.7 94.7-94.7h194.6c52.3 0 94.7 42.4 94.7 94.7zm-38.4 0c0-31.1-25.2-56.3-56.3-56.3H158.7c-31.1 0-56.3 25.2-56.3 56.3v194.6c0 31.1 25.2 56.3 56.3 56.3h194.6c31.1 0 56.3-25.2 56.3-56.3V158.7z"/>
-                    <circle cx="361.5" cy="150.5" r="28"/>
-                  </svg>
+                  <svg viewBox="0 0 448 512" class="social-icon"><path d="M224.1 141c-43.6 0-79 35.4-79 79s35.4 79 79 79 79-35.4 79-79-35.4-79-79-79zm0 133.4c-30.1 0-54.5-24.4-54.5-54.5s24.4-54.5 54.5-54.5 54.5 24.4 54.5 54.5-24.4 54.5-54.5 54.5zM448 158.7v194.6c0 52.3-42.4 94.7-94.7 94.7H158.7c-52.3 0-94.7-42.4-94.7-94.7V158.7c0-52.3 42.4-94.7 94.7-94.7h194.6c52.3 0 94.7 42.4 94.7 94.7zm-38.4 0c0-31.1-25.2-56.3-56.3-56.3H158.7c-31.1 0-56.3 25.2-56.3 56.3v194.6c0 31.1 25.2 56.3 56.3 56.3h194.6c31.1 0 56.3-25.2 56.3-56.3V158.7z"/><circle cx="361.5" cy="150.5" r="28"/></svg>
                 )}
 
               </a>
@@ -73,105 +70,58 @@ const { contactData } = Astro.props;
 </section>
 
 <style>
-  /* FIX: Die gesamte Sektion nach vorne holen */
   .contact-section {
+    padding: 100px 0;
     position: relative;
-    z-index: 20; 
-    padding: 120px 0;
-    width: 100%;
-    overflow: visible; /* Verhindert das Abschneiden von Schatten */
+    z-index: 10;
   }
 
-  /* Titel-Anker (15% Links) */
-  .title-row {
-    padding-left: 15%;
-    margin-bottom: 5rem;
-  }
-
-  .section-title {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 3rem;
-    color: var(--text);
-    text-transform: uppercase;
-  }
-
-  .section-title-sub {
-    font-family: 'Bebas Neue', sans-serif;
-    color: var(--accent);
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  /* Die Karte selbst */
   .contact-grid {
     display: flex;
     justify-content: center;
-    position: relative;
-    z-index: 25;
+    padding: 0 5%;
   }
 
   .member-card {
-    background: rgba(17, 24, 31, 0.8); /* Etwas dunkler für besseren Kontrast */
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
-    padding: 4rem 3rem;
-    max-width: 500px;
+    max-width: 500px; /* Etwas kompakter */
     width: 100%;
+    margin: 0 auto;
     text-align: center;
-    transition: transform 0.3s ease;
+    position: relative; 
   }
 
-  .member-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent);
+  .card-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
-  /* Mail-Icon Styling */
+  /* Mail-Icon kleiner gemacht (von 60px/70px auf 45px) */
   .outline-mail-icon {
-    width: 70px;
-    height: 70px;
+    width: 45px;
+    height: 45px;
     color: var(--accent);
-    display: block; /* Sicherstellen, dass es Platz einnimmt */
-    margin: 0 auto 2rem;
+    margin-bottom: 1.2rem;
     filter: drop-shadow(0 0 10px rgba(173, 255, 47, 0.3));
   }
 
-  /* Texte */
-  .accent-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #fff; }
-  .role-text { font-family: 'Bebas Neue', sans-serif; color: var(--accent); font-size: 1.3rem; margin-bottom: 1rem; }
-  .bio-text { color: var(--muted); line-height: 1.6; margin-bottom: 2.5rem; }
-
-  /* Button-Fix */
-  .no-underline { text-decoration: none !important; }
-
-  /* Social-Leiste */
   .social-links-row {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 2.5rem;
-    padding-top: 2rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .social-svg-icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--text);
-    opacity: 0.5;
-    transition: all 0.3s ease;
+  .no-underline {
+    text-decoration: none !important;
   }
 
-  .social-icon-link:hover .social-svg-icon {
-    fill: var(--accent);
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
-  /* Mobile */
   @media (max-width: 768px) {
-    .title-row { padding-left: 5%; }
-    .section-title { font-size: 2rem; }
+    .contact-section { padding: 60px 0; }
+    .member-card { padding: 2.5rem 1.5rem !important; }
   }
 </style>

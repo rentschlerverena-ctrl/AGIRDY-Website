@@ -9,6 +9,7 @@ import visionData from '../data/en/vision.json';
 import productData from '../data/en/product.json';
 import roadmapData from '../data/en/roadmap.json';
 import contactData from '../data/en/contact.json';
+import introData from '../data/en/intro.json';
 
 // 2. Komponenten importieren
 import Navbar from "../components/Navbar.astro";
@@ -20,6 +21,8 @@ import Product from '../components/Product.astro';
 import Roadmap from '../components/Roadmap.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import Intro from '../components/Intro.astro';
+
 
 // 3. Sprache festlegen
 const lang = "en"; 
@@ -56,7 +59,7 @@ const lang = "en";
           </a>
         </div>
       </Hero>
-
+      <Intro introData={introData} />
       <WhoWeAre teamData={teamData} />
       <WhatWeDoSection whatwedoData={whatwedoData} />
       <Vision visionData={visionData} />

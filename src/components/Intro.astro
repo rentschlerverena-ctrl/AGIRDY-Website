@@ -1,0 +1,171 @@
+---
+/* src/components/Intro.astro */
+const { introData: propsData } = Astro.props;
+
+// Notfall-Import falls propsData nicht durchgereicht wurde
+import backupData from '../data/en/intro.json';
+const data = propsData || backupData;
+
+if (!data) return null;
+---
+
+<section class="intro-section">
+  <div class="container">
+    
+
+<div class="scroll-indicator">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+    <path d="M6 10L12 16L18 10" 
+      stroke="var(--accent)" 
+      stroke-width="2.5" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"/>
+  </svg>
+</div>
+    
+    <div class="brand-header">
+      <h2 class="massive-title-archivo">{data.brand}</h2>
+      <div class="phonetic-wrap">
+        <span class="phonetic-text">{data.phonetic}</span>
+      </div>
+      <div class="divider-glow"></div>
+    </div>
+
+    <div class="statement-wrap">
+      <h1 class="philosophy-statement-lato">
+        {data.statement} <span class="highlight">{data.statementAccent}</span>
+      </h1>
+    </div>
+
+    <div class="origin-clean">
+      <div class="logo-minimal">
+        <div class="square-outline"
+        </div>
+      </div>
+      <div class="text-minimal">
+        <p class="origin-p" set:html={data.origin ? data.origin.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''}></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+
+.intro-section {
+  margin-top: -120px; /* zieht alles nach oben */
+}
+
+/* Pulsierender Pfeil Style */
+  .scroll-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+    animation: pulse-arrow 2s infinite;
+    
+  }
+
+@keyframes pulse-arrow {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(14px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.3; }
+}
+
+.scroll-indicator svg {
+  width: 60px;
+  height: 60px;
+}
+  .intro-section {
+    position: relative;
+    z-index: 10;
+    padding:0px 0;
+    background: transparent;
+  }
+
+  /* BRANDING: Archivo Black & Noch Größer */
+  .brand-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .massive-title-archivo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size:50px;
+    letter-spacing: -2px; /* Archivo Black sieht enger gesperrt oft wuchtiger aus */
+    line-height: 0.9;
+    margin: 0;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+
+  .phonetic-text {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+  
+    margin-top: 20px;
+    display: block;
+  }
+
+
+  /* STATEMENT: Normale Lato (kein Kursiv) */
+  .statement-wrap {
+    max-width: 1100px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+    padding: 0 0px;
+  }
+
+  .philosophy-statement-lato {
+    font-family: 'Lato', sans-serif;
+    font-weight: 100; /* Normaler Schriftschnitt */
+    font-style: normal; /* Explizit nicht kursiv */
+    font-size: 30px;
+    line-height: 1.4;
+    color: #fff;
+    text-transform: none;
+    letter-spacing: -0.5px;
+   font-style: italic;
+  }
+
+  .highlight {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ORIGIN CLEAN */
+
+  .origin-clean {
+    max-width: 1100px;
+    margin: 0 auto 120px auto;
+    text-align: center;
+    padding: 0 0px;
+  }
+
+  .origin-p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 100; /* Normaler Schriftschnitt */
+    font-style: normal; /* Explizit nicht kursiv */
+    font-size: 30px;
+    line-height: 1.4;
+    color: #fff;
+    text-transform: none;
+    letter-spacing: -0.5px;
+   font-style: italic;
+   text-align: center;
+  }
+
+  @media (max-width: 850px) {
+    .origin-clean {
+      flex-direction: column;
+      text-align: center;
+      gap: 40px;
+    }
+    .massive-title-archivo {
+      font-size: 4.5rem;
+      letter-spacing: -1px;
+    }
+  }
+</style>
