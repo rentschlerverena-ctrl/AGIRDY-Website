@@ -2,8 +2,10 @@
 /* src/components/Navbar.astro */
 const { lang = 'en' } = Astro.props; 
 
-// Logik: Wenn wir auf Englisch sind, führt der Switcher zu /de. 
-// Wenn wir auf Deutsch sind (in de.astro), führt er zurück zur Home /.
+// Wir definieren den Pfad zur jeweiligen Startseite
+const homePath = lang === 'en' ? '/' : '/de';
+
+// Logik für den Sprachumschalter
 const targetPath = lang === 'en' ? '/de' : '/';
 ---
 
@@ -11,19 +13,18 @@ const targetPath = lang === 'en' ? '/de' : '/';
   <div class="nav-container">
 
     <div class="logo">
-      <a href={lang === 'en' ? '/' : '/de'}>
+      <a href={homePath}>
         <img src="/Logo_weiss.png" alt="AGIRDY Logo" class="logo-img" />
       </a>
     </div>
 
     <ul class="nav-links" id="nav-menu">
-      <li><a href="#home">HOME</a></li>
-      <li><a href="#who-we-are">{lang === 'en' ? 'WHO WE ARE' : 'WER WIR SIND'}</a></li>
-      <li><a href="#what-we-do">{lang === 'en' ? 'WHAT WE DO' : 'WAS WIR TUN'}</a></li>
-      <li><a href="#vision">{lang === 'en' ? 'VISION & MISSION' : 'VISION & MISSION'}</a></li>
-      <li><a href="#product">{lang === 'en' ? 'PRODUCT' : 'PRODUKT'}</a></li>
-      <li><a href="#roadmap">ROADMAP</a></li>
-      <li><a href="#contact" class="nav-cta">{lang === 'en' ? 'CONTACT' : 'KONTAKT'}</a></li>
+      <li><a href={`${homePath}#who-we-are`}>{lang === 'en' ? 'WHO WE ARE' : 'WER WIR SIND'}</a></li>
+      <li><a href={`${homePath}#what-we-do`}>{lang === 'en' ? 'WHAT WE DO' : 'WAS WIR TUN'}</a></li>
+      <li><a href={`${homePath}#vision`}>{lang === 'en' ? 'VISION & MISSION' : 'VISION & MISSION'}</a></li>
+      <li><a href={`${homePath}#product`}>{lang === 'en' ? 'PRODUCT' : 'PRODUKT'}</a></li>
+      <li><a href={`${homePath}#roadmap`}>ROADMAP</a></li>
+      <li><a href={`${homePath}#contact`} class="nav-cta">{lang === 'en' ? 'CONTACT' : 'KONTAKT'}</a></li>
       
       <li class="lang-switch-container">
         <a href={targetPath} class="lang-link">
@@ -77,7 +78,6 @@ const targetPath = lang === 'en' ? '/de' : '/';
 </script>
 
 <style>
-  /* Dein bestehendes CSS bleibt komplett erhalten */
   .navbar {
     position: fixed;
     top: 0;
@@ -113,7 +113,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
 
   .nav-links a {
     text-decoration: none;
-    color: var(--text);
+    color: var(--text, #ffffff);
     font-family: 'Lato', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
@@ -121,9 +121,8 @@ const targetPath = lang === 'en' ? '/de' : '/';
     transition: color 0.3s ease;
   }
 
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--accent, #adff2f); }
 
-  /* NEU: CSS für den Sprachumschalter */
   .lang-switch-container {
     margin-left: 1rem;
     display: flex;
@@ -131,25 +130,26 @@ const targetPath = lang === 'en' ? '/de' : '/';
   }
 
   .lang-link {
-    font-size: 0.75rem !important; /* Etwas kleiner als die anderen Links */
+    font-size: 0.75rem !important;
     color: rgba(255,255,255,0.5) !important;
     display: flex;
     gap: 4px;
+    text-decoration: none;
   }
 
   .active-lang {
-    color: var(--accent) !important;
+    color: var(--accent, #adff2f) !important;
     font-weight: 900;
   }
 
   .sep {
     opacity: 0.3;
     pointer-events: none;
+    color: white;
   }
 
-  /* Burger & Mobile */
   .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 20px; background: transparent; border: none; cursor: pointer; z-index: 1100; }
-  .line { width: 100%; height: 2px; background-color: var(--text); transition: all 0.3s ease; }
+  .line { width: 100%; height: 2px; background-color: var(--text, #ffffff); transition: all 0.3s ease; }
 
   @media (max-width: 1100px) {
     .menu-toggle { display: flex; }

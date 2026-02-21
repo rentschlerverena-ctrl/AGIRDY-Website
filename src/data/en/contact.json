@@ -1,0 +1,14 @@
+{
+  "title": "Contact",
+  "subtitle": "An open exchange on your questions and challenges marks the starting point to become AGIRDY.",
+  "cardTitle": "Let's Talk",
+  "cardSubtitle": "Direct Channel",
+  "description": "Share your challenges with us and we help to become AGIRDY.",
+  "email": "p.feindert@googlemail.com",
+  "buttonText": "Contact",
+  "socials": [
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/deinname" },
+    { "platform": "Instagram", "url": "https://instagram.com/deinname" },
+    { "platform": "Twitter", "url": "https://instagram.com/deinname" }
+  ]
+}

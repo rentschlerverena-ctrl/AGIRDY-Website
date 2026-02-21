@@ -1,0 +1,14 @@
+{
+  "title": "Kontakt",
+  "subtitle": "An open exchange on your questions and challenges marks the starting point to become AGIRDY.",
+  "cardTitle": "Lass uns austauschen",
+  "cardSubtitle": "Direct Channel",
+  "description": "Teile deine Herausforderungen mit uns und wir helfen dir, AGIRDY zu werden.",
+  "email": "p.feindert@googlemail.com",
+  "buttonText": "Kontakt",
+  "socials": [
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/deinname" },
+    { "platform": "Instagram", "url": "https://instagram.com/deinname" },
+    { "platform": "Twitter", "url": "https://instagram.com/deinname" }
+  ]
+}

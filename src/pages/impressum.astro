@@ -1,0 +1,128 @@
+---
+/* src/pages/impressum.astro */
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'de';
+---
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum | AGIRDY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* Gleiche Styles wie oben für Konsistenz */
+    :root {
+      --accent: #adff2f;
+      --text: #ffffff;
+      --bg: #0a0f14;
+      --muted: rgba(255, 255, 255, 0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      line-height: 1.6;
+    }
+
+    .legal-page { padding: 180px 0 100px; min-height: 100vh; }
+    .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
+    .legal-header { margin-bottom: 80px; }
+
+    .archivo-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .dot { color: var(--accent); }
+    .accent-line { width: 80px; height: 4px; background: var(--accent); }
+    .legal-block { margin-bottom: 60px; }
+
+    .legal-block h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .legal-block h2::before {
+      content: "";
+      width: 4px;
+      height: 24px;
+      background: var(--accent);
+    }
+
+    .legal-block p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <Navbar lang={lang} />
+  
+  <main class="legal-page">
+    <div class="legal-container">
+      <header class="legal-header">
+        <h1 class="archivo-title">IMPRESSUM<span class="dot">.</span></h1>
+        <div class="accent-line"></div>
+      </header>
+
+      <section class="legal-content">
+        <div class="legal-block">
+          <h2>Angaben gemäß § 5 TMG</h2>
+          <p>
+            AGIRDY GmbH
+            Musterstraße 123
+            12345 Musterstadt
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Vertreten durch</h2>
+          <p>Max Mustermann (Geschäftsführer)</p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Kontakt</h2>
+          <p>
+            Telefon: +49 (0) 123 456789
+            E-Mail: info@agirdy.com
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Registereintrag</h2>
+          <p>
+            Eintragung im Handelsregister.
+            Registergericht: Amtsgericht Musterstadt
+            Registernummer: HRB 12345
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Umsatzsteuer-ID</h2>
+          <p>
+            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
+            DE 123 456 789
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer lang={lang} />
+</body>
+</html>
