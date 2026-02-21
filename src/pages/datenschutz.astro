@@ -1,0 +1,53 @@
+---
+/* src/pages/datenschutz.astro */
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const lang = 'de';
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutz | AGIRDY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #adff2f; --bg: #0a0f14; --text: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
+    .legal-page { padding: 180px 0 100px; min-height: 100vh; }
+    .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
+    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; }
+    .dot { color: var(--accent); }
+    .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
+    .legal-block { margin-bottom: 40px; }
+    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 15px; border-left: 3px solid var(--accent); padding-left: 15px; }
+    .legal-block p { color: rgba(255, 255, 255, 0.6); font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <Navbar lang={lang} />
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1 class="archivo-title">DATENSCHUTZ<span class="dot">.</span></h1>
+      <div class="accent-line"></div>
+      
+      <div class="legal-block">
+        <h2>1. Datenschutz auf einen Blick</h2>
+        <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Personenbezogene Daten werden auf dieser Webseite nur im technisch notwendigen Umfang erhoben.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>2. Hosting und Content Delivery Networks (CDN)</h2>
+        <p>Unsere Website wird bei Vercel gehostet. Die Datenschutzerklärung von Vercel finden Sie auf deren offizieller Website.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>3. Ihre Rechte</h2>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung.</p>
+      </div>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</body>
+</html>

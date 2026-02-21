@@ -1,0 +1,53 @@
+---
+/* src/pages/privacy.astro */
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const lang = 'en';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | AGIRDY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #adff2f; --bg: #0a0f14; --text: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
+    .legal-page { padding: 180px 0 100px; min-height: 100vh; }
+    .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
+    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; }
+    .dot { color: var(--accent); }
+    .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
+    .legal-block { margin-bottom: 40px; }
+    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 15px; border-left: 3px solid var(--accent); padding-left: 15px; }
+    .legal-block p { color: rgba(255, 255, 255, 0.6); font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <Navbar lang={lang} />
+  <main class="legal-page">
+    <div class="legal-container">
+      <h1 class="archivo-title">PRIVACY POLICY<span class="dot">.</span></h1>
+      <div class="accent-line"></div>
+      
+      <div class="legal-block">
+        <h2>1. Privacy at a glance</h2>
+        <p>We take the protection of your personal data very seriously. Personal data is only collected on this website to the extent technically necessary.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>2. Hosting and Content Delivery Networks (CDN)</h2>
+        <p>Our website is hosted by Vercel. You can find Vercel's privacy policy on their official website.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>3. Your Rights</h2>
+        <p>You have the right at any time to receive information free of charge about your stored personal data, its origin and recipients and the purpose of data processing.</p>
+      </div>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</body>
+</html>
