@@ -2,7 +2,7 @@
 /* src/pages/index.astro */
 import "../styles/global.css";
 
-// 1. Daten aus dem neuen EN-Ordner importieren
+// 1. Daten importieren
 import teamData from '../data/en/team.json';
 import whatwedoData from '../data/en/whatwedo.json';
 import visionData from '../data/en/vision.json';
@@ -16,15 +16,13 @@ import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 import WhoWeAre from "../components/WhoWeAre.astro"; 
 import WhatWeDoSection from '../components/WhatWeDo.astro';
-import Vision from '../components/Vision.astro'
+import Vision from '../components/Vision.astro';
 import Product from '../components/Product.astro';
 import Roadmap from '../components/Roadmap.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import Intro from '../components/Intro.astro';
 
-
-// 3. Sprache festlegen
 const lang = "en"; 
 ---
 
@@ -43,33 +41,23 @@ const lang = "en";
     <Navbar lang={lang} />
 
     <main>
-      <Hero>
-        <div class="hero" id="home">
-          <h1>
-            <span>Artificial</span>
-            <span>General</span>
-            <span class="accent">Intelligence</span>
-            <span>Ready</span>
-          </h1>
+      <Hero />
 
-          <h2>Philipp Feindert & Jan Junge</h2>
-
-          <a href="#contact" class="cta-link">
-            <button class="cta">Contact</button>
-          </a>
-        </div>
-      </Hero>
       <Intro introData={introData} />
+      
       <WhoWeAre teamData={teamData} />
+      
       <WhatWeDoSection whatwedoData={whatwedoData} />
+      
       <Vision visionData={visionData} />
+      
       <Product productData={productData} />
+      
       <Roadmap roadmapData={roadmapData} />
+      
       <Contact contactData={contactData} />
     </main>
 
-<Footer lang="en" />
-
+    <Footer lang={lang} />
   </body>
 </html>
-
