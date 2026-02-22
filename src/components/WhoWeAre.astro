@@ -1,9 +1,10 @@
 ---
 /* src/components/WhoWeAre.astro */
-const { teamData } = Astro.props; 
+const { teamData, lang = 'en' } = Astro.props; 
 
 if (!teamData) {
   console.error("WhoWeAre: Keine teamData empfangen!");
+  return null; 
 }
 ---
 
@@ -28,11 +29,17 @@ if (!teamData) {
             <p class="card-subtitle">{member.role}</p>
           </div>
           
-          <p class="card-desc bio-content" set:html={member.bio} />
+          <div class="card-desc" set:html={member.bio} />
+
+          <div class="more-about-wrapper">
+            <a href={`/${lang}/team/${member.name.toLowerCase().split(' ')[0]}`} class="read-more">
+              {teamData.readMoreText} <span class="arrow">→</span>
+            </a>
+          </div>
 
           {member.linkedin && (
             <a href={member.linkedin} target="_blank" rel="noopener noreferrer" class="social-link" aria-label={`LinkedIn Profil von ${member.name}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="social-icon" width="20" height="20" fill="currentColor">
                 <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
               </svg>
             </a>
@@ -44,76 +51,15 @@ if (!teamData) {
 </section>
 
 <style>
-  /* DEIN WICHTIGER PART FÜR DIE SICHTBARKEIT */
-  .who-we-are {
-    position: relative;
-    z-index: 10;
-    min-height: 100vh;
-    padding: 120px 0;
-    background: transparent;
-    width: 100%;
-  }
-
-  .container {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
-    gap: 3rem;
-    padding: 0 5%;
-    justify-content: center;
-  }
-
-  /* Team-Spezifisch: Profilbilder */
-  .image-ring {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    margin: 0 auto 2rem;
-    overflow: hidden;
-  }
-
-  .profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease;
-  }
-
-  .card:hover .profile-img {
-    filter: grayscale(0%);
-  }
-
-  /* Accent im Fliesstext (Bio) */
-  .bio-content :global(strong) {
-    color: var(--accent);
-    font-weight: normal;
-    letter-spacing: 0.5px;
-  }
-
-  /* LinkedIn Icons Styling */
-  .social-link {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    transition: transform 0.2s ease;
-  }
-
-  .social-icon {
-    width: 20px;
-    height: 20px;
-    fill: var(--text);
-    opacity: 0.4;
-    transition: all 0.3s ease;
-  }
-
-  .social-link:hover .social-icon {
-    opacity: 1;
-    fill: var(--accent);
-  }
+  /* Styling bleibt wie von dir geliefert, um das Design zu wahren */
+  .who-we-are { position: relative; z-index: 10; padding: 120px 0; background: transparent; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 400px)); gap: 3rem; padding: 0 5%; justify-content: center; }
+  .image-ring { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--accent); margin: 0 auto 1.5rem; overflow: hidden; }
+  .profile-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease; }
+  .card:hover .profile-img { filter: grayscale(0%); }
+  .more-about-wrapper { margin-top: 1rem; padding-bottom: 0.5rem; text-align: center; }
+  .read-more { color: var(--accent); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+  .read-more:hover { color: #ffffff; }
+  .social-link { display: block; margin-top: 1rem; color: var(--text-muted); transition: color 0.3s ease; text-align: center; }
+  .social-link:hover { color: var(--accent); }
 </style>

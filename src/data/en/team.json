@@ -1,20 +1,33 @@
 {
   "title": "Who We Are",
   "subtitle": "Corporate Excellence. Startup Agility.",
+  "readMoreText": "More about me",
   "members": [
     {
       "name": "Philipp Feindert",
       "role": "The Strategic Navigator",
       "image": "/philipp.jpg",
       "linkedin": "https://linkedin.com/in/philippfeindert",
-      "bio": "Hi, I’m Philipp. My focus is always the <strong>WHY</strong> and the <strong>WHERE</strong>. As a former AI forecast and AI strategy expert at the Research Department of Mercedes-Benz, I translate the exponential pace of artificial intelligence into clear and human centered guiding principles.."
+      "bio": "Hi, I’m Philipp. My focus is always the <strong>WHY</strong> and the <strong>WHERE</strong>. As a former AI forecast and AI strategy expert at the Research Department of Mercedes-Benz, I translate the exponential pace of artificial intelligence into clear and human centered guiding principles.",
+      "mehrInfo": "I prioritize the protection of unique economic value by ensuring that technology enhances organizational identity rather than replacing its human foundation. I bridge the gap between visionary strategys and todays execution to make the digital transformation feel safe, personal, and approachable.",
+      "timeline": [
+        { "year": "2025", "station": "Founder @ AGIRDY", "desc": "Strategic direction and AGI readiness frameworks." },
+        { "year": "2021", "station": "AI Strategy @ Mercedes-Benz", "desc": "Research Department: AI forecasting and strategic implementation." },
+        { "year": "2018", "station": "Batterie experte", "desc": "Batterie" }
+      ]
     },
     {
       "name": "Jan Junge",
       "role": "The Technological Architect",
       "image": "/jan.jpg",
       "linkedin": "https://linkedin.com/in/philippfeindert",
-      "bio": "Hi, I am Jan.  My focus is always the <strong>HOW</strong> and the <strong>WHAT</strong>. As a former research and development engineer at the research department of Mercedes Benz, I transform complex technical innovation into reliable and industrial grade system."
+      "bio": "Hi, I am Jan. My focus is always the <strong>HOW</strong> and the <strong>WHAT</strong>. As a former research and development engineer at the research department of Mercedes Benz, I transform complex technical innovation into reliable and industrial grade system.",
+      "mehrInfo": "I build the technical implementation of the AGIRDYTM vision into industrial grade systems under the premise of absolute data sovereignty and security. I ensure the delivery of high performance results by utilizing the latest technological advancements to remain at the forefront of AGI readiness.",
+      "timeline": [
+        { "year": "2024", "station": "Founder @ AGIRDY", "desc": "Architecting industrial-grade AGI systems." },
+        { "year": "2020", "station": "R&D Engineer @ Mercedes-Benz", "desc": "Developing next-gen systems in the research department." },
+        { "year": "2017", "station": "xyz", "desc": "ich weis nicht" }
+      ]
     }
   ]
 }

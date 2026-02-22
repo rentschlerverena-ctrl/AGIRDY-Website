@@ -85,7 +85,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
     width: 100%;
     z-index: 1000;
     background: rgba(10, 15, 20, 0.85);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 1.2rem 0;
@@ -151,19 +151,74 @@ const targetPath = lang === 'en' ? '/de' : '/';
   .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 20px; background: transparent; border: none; cursor: pointer; z-index: 1100; }
   .line { width: 100%; height: 2px; background-color: var(--text, #ffffff); transition: all 0.3s ease; }
 
-  @media (max-width: 1100px) {
-    .menu-toggle { display: flex; }
-    .nav-links {
-      position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-      flex-direction: column; justify-content: center; background: rgba(10, 15, 20, 0.95);
-      transition: right 0.5s ease; z-index: 1050;
+@media (max-width: 1100px) {
+    .menu-toggle { 
+      display: flex; 
+      z-index: 2000; /* Sicherstellen, dass der Button über dem Menü liegt */
     }
-    .nav-links.active { right: 0; }
-    .nav-links a { font-size: 1.8rem; }
-    .lang-link { font-size: 1.5rem !important; margin-top: 1rem; }
-    
-    .menu-toggle.is-active .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .menu-toggle.is-active .line:nth-child(2) { opacity: 0; }
-    .menu-toggle.is-active .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .nav-links {
+      position: fixed; 
+      top: 0; 
+      right: -100%; 
+      width: 100%; 
+      height: 100vh;
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 0; 
+      margin: 0;
+      background: rgba(10, 15, 20, 0.98);
+      transition: right 0.5s ease; 
+      z-index: 1050;
+    }
+
+    .nav-links.active { 
+      right: 0; 
+    }
+
+    /* Zentrierung der Menüpunkte */
+    .nav-links li {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin: 15px 0; /* Etwas Abstand zwischen den Punkten */
+    }
+
+    .nav-links a { 
+      font-size: 1.8rem; 
+      text-align: center;
+      width: auto;
+    }
+
+    /* FIX FÜR DAS SCHLIESSEN-X (Animation) */
+    .menu-toggle.is-active .line:nth-child(1) { 
+      transform: translateY(9px) rotate(45deg); 
+      background-color: var(--accent, #adff2f); /* Optional: Farbe ändern wenn offen */
+    }
+    .menu-toggle.is-active .line:nth-child(2) { 
+      opacity: 0; 
+    }
+    .menu-toggle.is-active .line:nth-child(3) { 
+      transform: translateY(-9px) rotate(-45deg); 
+      background-color: var(--accent, #adff2f);
+    }
+
+    /* SPRACHUMSCHALTER ZENTRIERUNG */
+    .lang-switch-container {
+      margin-left: 0 !important;
+      margin-top: 2rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lang-link { 
+      font-size: 1.5rem !important; 
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
   }
 </style>

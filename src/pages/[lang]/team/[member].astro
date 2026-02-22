@@ -1,0 +1,177 @@
+---
+// src/pages/[lang]/team/[member].astro
+import teamDE from '../../../data/de/team.json';
+import teamEN from '../../../data/en/team.json';
+import Layout from '../../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const languages = [
+    { code: 'de', data: teamDE },
+    { code: 'en', data: teamEN }
+  ];
+
+  return languages.flatMap((langObj) => {
+    return langObj.data.members.map((member) => {
+      const slug = member.name.toLowerCase().split(' ')[0]; 
+      return {
+        params: { lang: langObj.code, member: slug },
+        props: { 
+          person: member, 
+          lang: langObj.code,
+          backText: langObj.code === 'en' ? 'Back' : 'Zurück',
+          headerTitle: langObj.code === 'en' ? 'Professional Evolution' : 'Technologische Evolution'
+        }
+      };
+    });
+  });
+}
+
+const { person, lang, backText, headerTitle } = Astro.props;
+---
+
+<Layout title={`${person.name} | AGIRDY`} lang={lang}>
+  <div class="agi-detail-page">
+    
+    <div class="container identity-section">
+      <a href={lang === 'en' ? `/#who-we-are` : `/de/#who-we-are`} class="back-link">
+        <span class="arrow">←</span> {backText}
+      </a>
+      
+      <div class="profile-intro">
+        <div class="image-frame">
+          <img src={person.image} alt={person.name} class="profile-img" />
+        </div>
+
+        <div class="name-box">
+          <header class="card-header" style="margin-bottom: 2rem;">
+            <h1 class="card-title" style="font-size: clamp(3rem, 8vw, 5rem);">{person.name}</h1>
+            <p class="card-subtitle" style="font-size: 1.5rem;">{person.role}</p>
+          </header>
+          
+          <div class="profile-text-content">
+            <div class="card-desc" style="font-size: 1.2rem; margin-bottom: 1rem;" set:html={person.bio} />
+            <div class="card-desc" set:html={person.mehrInfo} />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="experience-roadmap">
+      <div class="container">
+        <div class="title-row">
+          <h2 class="section-title">{headerTitle}</h2>
+          <p class="section-title-sub">The Path of Innovation</p>
+        </div>
+      </div>
+
+      <div class="roadmap-horizontal-wrapper">
+        <div class="roadmap-scroll-area">
+          <div class="roadmap-track">
+            <div class="main-axis"></div>
+            
+            <div class="steps-grid">
+              {person.timeline && person.timeline.map((item, index) => (
+                <div class={`step-node ${index % 2 === 0 ? 'is-top' : 'is-bottom'}`}>
+                  
+                  <div class="phase-outline">0{index + 1}</div>
+
+                  <div class="card roadmap-step-card">
+                    <div class="card-header">
+                      <span class="card-subtitle">{item.year}</span>
+                      <h3 class="card-title" style="font-size: 2.2rem;">{item.station}</h3>
+                    </div>
+                    <p class="card-desc">{item.desc}</p>
+                  </div>
+
+                  <div class="node-connection">
+                    <div class="connection-line"></div>
+                    <div class="roadmap-feature-badge">
+                      {index + 1}
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .agi-detail-page { padding-top: 140px; padding-bottom: 120px; overflow-x: hidden; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+  .back-link { 
+    font-family: 'Bebas Neue', sans-serif; 
+    color: var(--accent); 
+    text-decoration: none; 
+    font-size: 1.1rem; 
+    letter-spacing: 2px; 
+    display: inline-flex; 
+    align-items: center; 
+    margin-bottom: 4rem; 
+    transition: 0.3s ease; 
+  }
+  .back-link:hover { transform: translateX(-8px); }
+  .arrow { margin-right: 8px; }
+
+  /* --- PROFILE HEADER STYLING --- */
+  .profile-intro { 
+    display: grid; 
+    grid-template-columns: 350px 1fr; 
+    gap: 80px; 
+    margin-bottom: 100px; 
+    align-items: start; 
+  }
+  
+  .image-frame { 
+    position: relative; 
+    width: 100%; 
+    border-radius: var(--radius); 
+    overflow: hidden; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6); 
+  }
+  .profile-img { width: 100%; display: block; }
+
+  .profile-text-content { max-width: 850px; }
+
+  /* --- ROADMAP-STYLE CSS (Unverändert für Konsistenz) --- */
+  .experience-roadmap { position: relative; padding: 60px 0; z-index: 10; border-top: 1px solid rgba(255,255,255,0.05); }
+  .roadmap-horizontal-wrapper { width: 100%; overflow-x: auto; padding: 40px 0; scrollbar-width: none; }
+  .roadmap-horizontal-wrapper::-webkit-scrollbar { display: none; }
+  .roadmap-track { position: relative; min-width: 1300px; height: 750px; display: flex; align-items: center; }
+  .main-axis {
+    position: absolute; top: 50%; left: 0; right: 0; height: 2px;
+    background: var(--accent); box-shadow: 0 0 15px var(--accent);
+    transform: translateY(-50%); z-index: 5;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+  .steps-grid { display: flex; justify-content: space-around; width: 100%; max-width: 1500px; margin: 0 auto; height: 100%; align-items: center; }
+  .step-node { position: relative; width: 340px; height: 100%; display: flex; flex-direction: column; align-items: center; }
+  .is-top { justify-content: flex-start; padding-top: 20px; }
+  .is-bottom { justify-content: flex-end; padding-bottom: 20px; }
+  .roadmap-step-card { width: 340px; flex: none !important; height: auto !important; padding: 2.2rem; z-index: 20; background: rgba(17, 24, 31, 0.7) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .node-connection { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
+  .connection-line { width: 1px; background: var(--accent); height: 100%; }
+  .is-top .node-connection { justify-content: flex-end; transform: translate(-50%, -100%); top: 50%; }
+  .is-top .connection-line { background: linear-gradient(to top, var(--accent), transparent); }
+  .is-bottom .node-connection { justify-content: flex-start; transform: translate(-50%, 0%); top: 50%; }
+  .is-bottom .connection-line { background: linear-gradient(to bottom, var(--accent), transparent); }
+  .roadmap-feature-badge { width: 50px; height: 50px; background: var(--accent); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; font-weight: bold; z-index: 15; box-shadow: 0 0 20px rgba(173, 255, 47, 0.4); position: absolute; bottom: -25px; }
+  .is-bottom .roadmap-feature-badge { bottom: auto; top: -25px; }
+  .phase-outline { position: absolute; font-family: 'Archivo Black', sans-serif; font-size: 10rem; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); z-index: 1; top: 50%; transform: translateY(-50%); }
+
+  @media (max-width: 1024px) {
+    .profile-intro { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .roadmap-track { min-width: 100%; height: auto; display: block; }
+    .main-axis, .node-connection, .phase-outline { display: none !important; }
+    .steps-grid { flex-direction: column; gap: 3rem; align-items: center; padding: 0 5%; width: 100%; }
+    .step-node { width: 100%; height: auto; padding: 0 !important; }
+    .roadmap-step-card { width: 100%; max-width: 500px; }
+  }
+</style>
