@@ -61,7 +61,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
 </nav>
 
 <style>
-  /* --- NAVBAR BASIS --- */
+  /* --- DESKTOP BASIS --- */
   .navbar {
     position: fixed;
     top: 0;
@@ -89,8 +89,6 @@ const targetPath = lang === 'en' ? '/de' : '/';
     list-style: none;
     align-items: center;
     gap: 20px;
-    margin: 0;
-    padding: 0;
   }
 
   .nav-links a {
@@ -105,20 +103,13 @@ const targetPath = lang === 'en' ? '/de' : '/';
     opacity: 0.7;
   }
 
-  /* --- CTA & SPRACHSWITCH --- */
   .nav-cta {
     opacity: 1 !important;
     color: #adff2f !important;
     border: 1.5px solid #adff2f;
     padding: 10px 25px !important;
     border-radius: 50px;
-    background: transparent;
-  }
-
-  .nav-cta:hover {
-    background: #adff2f !important;
-    color: #0a0f14 !important;
-    box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+    white-space: nowrap;
   }
 
   .lang-switch-container {
@@ -136,7 +127,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
       visibility: visible; 
       transform: translateX(-50%) translateY(0); 
     }
-    .dropdown:hover .chevron { transform: rotate(180deg); opacity: 1; }
+    .dropdown:hover .chevron { transform: rotate(180deg); }
   }
 
   .dropdown { position: relative; }
@@ -155,14 +146,12 @@ const targetPath = lang === 'en' ? '/de' : '/';
     border-radius: 8px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.25s ease;
     list-style: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
   .dropdown-menu a { padding: 12px 20px; display: block; font-size: 0.7rem; }
 
-  /* --- MOBILE STYLES --- */
+  /* --- MOBILE STYLES (ZENTRIERT & VOLLBILD) --- */
   .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1100; }
   .line { width: 28px; height: 2px; background: white; transition: 0.4s; }
 
@@ -172,25 +161,44 @@ const targetPath = lang === 'en' ? '/de' : '/';
 
   @media (max-width: 1024px) {
     .menu-toggle { display: flex; }
+
     .nav-links {
       position: fixed;
       right: -100%;
       top: 0;
-      width: 100%;
-      height: 100vh;
+      width: 100vw; /* Volle Breite */
+      height: 100vh; /* Volle Höhe */
       background: #0a0f14;
       flex-direction: column;
-      padding-top: 100px;
-      padding-bottom: 40px;
+      justify-content: center; /* Vertikale Zentrierung */
+      align-items: center; /* Horizontale Zentrierung */
+      padding: 0;
+      margin: 0;
       transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-      overflow-y: auto; /* Erlaubt Scrollen IM Menü, falls es zu lang ist */
+      overflow-y: auto;
+      z-index: 1050;
     }
-    .nav-links.active { right: 0; }
-    .nav-links li { width: 100%; text-align: center; }
-    .nav-links a { font-size: 1.5rem; display: block; padding: 15px; opacity: 1; }
 
-    .nav-cta { border: 1px solid #adff2f !important; margin: 10px auto; width: fit-content; }
-    .lang-switch-container { border: none; margin: 20px 0 0 0; padding: 0; }
+    .nav-links.active { right: 0; }
+
+    .nav-links li { 
+      width: 100%; 
+      text-align: center; 
+      margin: 10px 0;
+    }
+
+    .nav-links a { 
+      font-size: 1.6rem; 
+      display: inline-block; 
+      padding: 10px; 
+      opacity: 1; 
+    }
+
+    /* Zentrierung für Dropdown Trigger */
+    .dropdown-trigger-wrapper { 
+      justify-content: center; 
+      width: 100%;
+    }
 
     .dropdown-menu {
       position: static;
@@ -203,6 +211,21 @@ const targetPath = lang === 'en' ? '/de' : '/';
       border: none;
     }
     .dropdown.open .dropdown-menu { display: block; }
+    .dropdown-menu a { font-size: 1.2rem; opacity: 0.6; }
+
+    /* CTA & Sprachschalter zentriert */
+    .nav-cta {
+      margin: 15px auto;
+      display: inline-block;
+      font-size: 1.6rem !important;
+    }
+
+    .lang-switch-container {
+      border: none;
+      margin: 20px 0 0 0;
+      padding: 0;
+      width: 100%;
+    }
   }
 </style>
 
@@ -212,37 +235,35 @@ const targetPath = lang === 'en' ? '/de' : '/';
   const dropdowns = document.querySelectorAll('.dropdown');
   const body = document.body;
 
-  // Mobile Menu Toggle
   menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('is-active');
+    const isActive = menuToggle.classList.toggle('is-active');
     navMenu.classList.toggle('active');
     
-    // FIX: Verhindert Scrollen auf der Hauptseite, wenn Menü offen ist
-    if (navMenu.classList.contains('active')) {
-      body.style.overflow = 'hidden';
-    } else {
-      body.style.overflow = '';
-    }
+    // Body Scroll Lock
+    body.style.overflow = isActive ? 'hidden' : '';
   });
 
-  // Mobile Dropdown Accordion
+  // Mobile Accordion Logic
   dropdowns.forEach(dropdown => {
     const trigger = dropdown.querySelector('.dropdown-trigger-wrapper');
-    trigger.addEventListener('click', () => {
+    trigger.addEventListener('click', (e) => {
       if (window.innerWidth <= 1024) {
+        // Verhindert das Schließen des Menüs beim Klick auf Dropdown
+        e.stopPropagation(); 
         dropdown.classList.toggle('open');
       }
     });
   });
 
-  // Schließt Menü bei Link-Klick und reaktiviert Scrolling
+  // Schließen bei Link-Klick
   document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 1024 && link.parentElement.classList.contains('dropdown-trigger-wrapper')) return;
+    link.addEventListener('click', (e) => {
+      // Nur schließen, wenn es kein Dropdown-Öffner ist
+      if (window.innerWidth <= 1024 && link.closest('.dropdown-trigger-wrapper')) return;
       
       menuToggle.classList.remove('is-active');
       navMenu.classList.remove('active');
-      body.style.overflow = ''; // Scrolling wieder erlauben
+      body.style.overflow = '';
     });
   });
 </script>
