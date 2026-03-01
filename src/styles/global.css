@@ -67,8 +67,7 @@ h2 {
   text-align: left;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-size: clamp(3.2rem, 5vw, 5rem);
-s
+  font-size: clamp(3.5rem, 8vw, 5rem);
 }
 
 .hero h1 span {
