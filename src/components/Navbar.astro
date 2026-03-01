@@ -61,6 +61,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
 </nav>
 
 <style>
+  /* --- NAVBAR BASIS --- */
   .navbar {
     position: fixed;
     top: 0;
@@ -104,7 +105,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
     opacity: 0.7;
   }
 
-  /* --- RUNDER CTA (CONTACT) --- */
+  /* --- CTA & SPRACHSWITCH --- */
   .nav-cta {
     opacity: 1 !important;
     color: #adff2f !important;
@@ -112,39 +113,24 @@ const targetPath = lang === 'en' ? '/de' : '/';
     padding: 10px 25px !important;
     border-radius: 50px;
     background: transparent;
-    display: inline-block;
-    white-space: nowrap;
   }
 
   .nav-cta:hover {
     background: #adff2f !important;
     color: #0a0f14 !important;
     box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
-    transform: translateY(-1px);
   }
 
-  /* --- SPRACHSWITCH SEPARATOR --- */
   .lang-switch-container {
     margin-left: 10px;
     padding-left: 20px;
     border-left: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .lang-switch {
-    font-weight: 900 !important;
-    opacity: 0.5 !important;
-  }
-  .lang-switch:hover { opacity: 1 !important; color: #adff2f !important; }
-
-  /* --- DESKTOP DROPDOWN STABILITÄT --- */
+  /* --- DESKTOP DROPDOWN --- */
   @media (min-width: 1025px) {
     .nav-links a:not(.nav-cta):hover { opacity: 1; color: #adff2f; }
-    
-    .dropdown { 
-      padding: 15px 0; 
-      margin: -15px 0; /* Vergrößert Hover-Zone für Stabilität */
-    }
-
+    .dropdown { padding: 15px 0; margin: -15px 0; }
     .dropdown:hover .dropdown-menu { 
       opacity: 1; 
       visibility: visible; 
@@ -174,21 +160,9 @@ const targetPath = lang === 'en' ? '/de' : '/';
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
-  .dropdown-menu a { 
-    padding: 12px 20px; 
-    display: block; 
-    font-size: 0.7rem; 
-    white-space: nowrap;
-    opacity: 0.8;
-  }
+  .dropdown-menu a { padding: 12px 20px; display: block; font-size: 0.7rem; }
 
-  .dropdown-menu a:hover {
-    background: rgba(173, 255, 47, 0.1);
-    color: #adff2f;
-    opacity: 1;
-  }
-
-  /* --- MOBILE STYLES (HAMBURGER & X) --- */
+  /* --- MOBILE STYLES --- */
   .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1100; }
   .line { width: 28px; height: 2px; background: white; transition: 0.4s; }
 
@@ -207,28 +181,16 @@ const targetPath = lang === 'en' ? '/de' : '/';
       background: #0a0f14;
       flex-direction: column;
       padding-top: 100px;
+      padding-bottom: 40px;
       transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+      overflow-y: auto; /* Erlaubt Scrollen IM Menü, falls es zu lang ist */
     }
     .nav-links.active { right: 0; }
-    .nav-links li { width: 100%; text-align: center; margin-bottom: 5px; }
-    .nav-links a { font-size: 1.5rem; display: block; padding: 12px; opacity: 1; }
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links a { font-size: 1.5rem; display: block; padding: 15px; opacity: 1; }
 
-    .nav-cta {
-      border: 1px solid #adff2f !important;
-      margin: 10px auto;
-      width: fit-content;
-    }
-
-    .lang-switch-container {
-      border-left: none;
-      margin-left: 0;
-      padding-left: 0;
-      margin-top: 20px;
-    }
-
-    .dropdown-trigger-wrapper { justify-content: center; padding: 15px; }
-    .dropdown-trigger-wrapper a { padding: 0; font-size: 1.5rem; }
-    .chevron { font-size: 1.2rem; }
+    .nav-cta { border: 1px solid #adff2f !important; margin: 10px auto; width: fit-content; }
+    .lang-switch-container { border: none; margin: 20px 0 0 0; padding: 0; }
 
     .dropdown-menu {
       position: static;
@@ -238,7 +200,6 @@ const targetPath = lang === 'en' ? '/de' : '/';
       display: none;
       background: rgba(255, 255, 255, 0.05);
       width: 100%;
-      box-shadow: none;
       border: none;
     }
     .dropdown.open .dropdown-menu { display: block; }
@@ -249,11 +210,19 @@ const targetPath = lang === 'en' ? '/de' : '/';
   const menuToggle = document.getElementById('mobile-menu');
   const navMenu = document.getElementById('nav-menu');
   const dropdowns = document.querySelectorAll('.dropdown');
+  const body = document.body;
 
-  // Open/Close Mobile Menu
+  // Mobile Menu Toggle
   menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('is-active');
     navMenu.classList.toggle('active');
+    
+    // FIX: Verhindert Scrollen auf der Hauptseite, wenn Menü offen ist
+    if (navMenu.classList.contains('active')) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = '';
+    }
   });
 
   // Mobile Dropdown Accordion
@@ -266,13 +235,14 @@ const targetPath = lang === 'en' ? '/de' : '/';
     });
   });
 
-  // Close menu on link click
+  // Schließt Menü bei Link-Klick und reaktiviert Scrolling
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
-      // Don't close if it's just a dropdown trigger on mobile
       if (window.innerWidth <= 1024 && link.parentElement.classList.contains('dropdown-trigger-wrapper')) return;
+      
       menuToggle.classList.remove('is-active');
       navMenu.classList.remove('active');
+      body.style.overflow = ''; // Scrolling wieder erlauben
     });
   });
 </script>
