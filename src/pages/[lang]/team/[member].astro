@@ -3,6 +3,7 @@
 import teamDE from '../../../data/de/team.json';
 import teamEN from '../../../data/en/team.json';
 import Layout from '../../../layouts/Layout.astro';
+import "../../../styles/global.css";
 
 export async function getStaticPaths() {
   const languages = [
@@ -56,16 +57,9 @@ const { person, lang, backText, headerTitle } = Astro.props;
       </div>
     </div>
 
-    <section class="experience-roadmap">
-      <div class="container">
-        <div class="title-row">
-          <h2 class="section-title">{headerTitle}</h2>
-          <p class="section-title-sub">The Path of Innovation</p>
-        </div>
-      </div>
 
       <div class="roadmap-horizontal-wrapper">
-        <div class="roadmap-scroll-area">
+        <div class="roadmap-scroll-area">s
           <div class="roadmap-track">
             <div class="main-axis"></div>
             

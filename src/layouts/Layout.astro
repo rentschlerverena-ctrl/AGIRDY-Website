@@ -7,10 +7,10 @@ interface Props {
 
 const { title, lang = 'en' } = Astro.props;
 
-// WICHTIG: Prüfe, ob die Pfade hier wirklich stimmen!
+// Import der globalen Styles und der Basis-Komponenten
+import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/global.css'; 
 ---
 
 <!DOCTYPE html>
@@ -21,7 +21,20 @@ import '../styles/global.css';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style is:global>
+      /* Optionaler Fix: Verhindert horizontales Scrollen auf allen Seiten */
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background-color: #0a0f14; /* Deine Grundfarbe */
+      }
+    </style>
   </head>
   <body>
     <Navbar lang={lang} />
@@ -31,7 +44,5 @@ import '../styles/global.css';
     </main>
 
     <Footer lang={lang} />
-
-  
   </body>
 </html>
