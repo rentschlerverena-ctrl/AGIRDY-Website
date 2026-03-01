@@ -67,7 +67,27 @@ h2 {
   text-align: left;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-size: clamp(3.5rem, 8vw, 5rem);
+  
+  /* Erläuterung clamp:
+     1.8rem = Mindestgröße für kleinste Handys
+     9vw   = Dynamische Größe (passt sich dem iPhone 12 Pro Max perfekt an)
+     5rem  = Maximalgröße für Desktop
+  */
+  font-size: clamp(1.8rem, 9vw, 5rem);
+
+  /* Diese drei Zeilen verhindern das seitliche Wischen/Ausbrechen: */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto; 
+  max-width: 100%; /* Verhindert, dass die Box breiter als das Handy wird */
+}
+
+/* Spezieller Fix für extrem lange Wörter auf Mobile */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 8.5vw; /* Erzwingt eine Breite, die auf das Display passt */
+    line-height: 1.2;
+  }
 }
 
 .hero h1 span {
