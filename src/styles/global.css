@@ -85,7 +85,7 @@ h2 {
 /* Spezieller Fix für extrem lange Wörter auf Mobile */
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 8.5vw; /* Erzwingt eine Breite, die auf das Display passt */
+    font-size: 9.5vw; /* Erzwingt eine Breite, die auf das Display passt */
     line-height: 1.2;
   }
 }
