@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>AGI Ready Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body { margin: 0; background-color: #0a0a0a; color: #fff; font-family: 'Bebas Neue', sans-serif; overflow: hidden; }
+        #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
+        
+        .slide {
+            position: absolute; width: 100%; height: 100%; z-index: 2;
+            display: none; flex-direction: column; justify-content: center;
+            padding-left: 20%; opacity: 0; transition: opacity 0.8s ease-in-out;
+        }
+        .active { display: flex; opacity: 1; }
+
+        h1 { font-family: 'Archivo Black', sans-serif; font-size: 5rem; line-height: 1.1; margin: 0; text-transform: uppercase; }
+        .highlight { color: #bfff00; }
+        .author { margin-top: 40px; letter-spacing: 4px; font-size: 1.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <script>
+        // Hier stehen deine Daten – das ist das Herzstück für deine Kollegen
+        const slidesData = [
+            {
+                "title": "ARTIFICIAL<br>GENERAL<br><span class='highlight'>INTELLIGENCE</span><br>READY",
+                "subtitle": "PHILIPP FEINDERT & JAN JUNGE"
+            },
+            {
+                "title": "DIE ZUKUNFT<br>DER KI",
+                "subtitle": "Strategien für eine neue Ära"
+            }
+        ];
+
+        // Automatische Generierung
+        const body = document.body;
+        slidesData.forEach((slide, index) => {
+            const section = document.createElement('section');
+            section.className = `slide ${index === 0 ? 'active' : ''}`;
+            section.id = `slide${index}`;
+            section.innerHTML = `<h1>${slide.title}</h1><div class="author">${slide.subtitle}</div>`;
+            body.appendChild(section);
+        });
+
+        // Navigation
+        let currentSlide = 0;
+        document.addEventListener('keydown', (e) => {
+            const slides = document.querySelectorAll('.slide');
+            if(e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide++;
+                slides[currentSlide].classList.add('active');
+            } else if(e.key === 'ArrowLeft' && currentSlide > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide--;
+                slides[currentSlide].classList.add('active');
+            }
+        });
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 30 },
+                "color": { "value": "#bfff00" },
+                "opacity": { "value": 0.3 },
+                "size": { "value": 2 },
+                "line_linked": { "enable": true, "distance": 200, "color": "#bfff00", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 0.5 }
+            }
+        });
+    </script>
+</body>
+</html>

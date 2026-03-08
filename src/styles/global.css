@@ -317,4 +317,14 @@ html {
 }
 
 
+/* Ergänzung für die Präsentation */
+.reveal .slides {
+  width: 90% !important;
+  height: 90% !important;
+}
+
+.reveal section {
+  background: transparent !important;
+}
+
 }
