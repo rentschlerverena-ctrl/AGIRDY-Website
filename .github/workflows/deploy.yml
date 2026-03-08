@@ -33,5 +33,5 @@ jobs:
           # Dein Pfad aus dem FileZilla-Screenshot
           server-dir: ./
           # Wir nutzen Standard FTP, um den 'AUTH' Fehler zu vermeiden
-          protocol: SFTP 
+          protocol: FTP 
           port: 22
