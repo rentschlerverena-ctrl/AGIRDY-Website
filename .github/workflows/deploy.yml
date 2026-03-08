@@ -16,23 +16,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: 🏗️ Astro Build
         run: |
           npm install
           npm run build
 
-      - name: 🚀 Upload via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🚀 Upload via SFTP (Port 22)
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # WICHTIG: Astro baut alles in den 'dist' Ordner
-          local-dir: ./dist/
-          # Hier ggf. den Pfad anpassen (meistens / oder /htdocs)
-          server-dir: ./
-          # Deine IONOS-Einstellungen:
-          protocol: sftp
           port: 22
+          local_path: './dist/*'
+          # WICHTIG: Prüfe bei IONOS, ob dies dein Zielordner ist
+          remote_path: '/' 
+          sftp_args: '-o ConnectTimeout=5'
