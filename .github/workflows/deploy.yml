@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Gebuendelt Fix)
+name: Astro zu IONOS (Gebuendelt & Direkt)
 
 on:
   push:
@@ -22,16 +22,17 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Sync Inhalt von dist nach Root
+      - name: 🚀 Sync Inhalt direkt nach Root
+        # Wir nutzen diese Action, da sie in Bild 15 schon "grün" war
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
-          # Das ist der wichtigste Teil:
-          # local_path mit '*' nimmt nur den INHALT, nicht den Ordner 'dist' selbst
-          local_path: './dist/*'
-          # remote_path '/' legt es direkt ins Hauptverzeichnis
+          # Das './' am Ende von dist ist der entscheidende Trick: 
+          # Es kopiert den INHALT von dist, nicht den Ordner selbst.
+          local_path: './dist/'
+          # Wir laden es direkt ins Root-Verzeichnis
           remote_path: '/'
           sftp_only: true
