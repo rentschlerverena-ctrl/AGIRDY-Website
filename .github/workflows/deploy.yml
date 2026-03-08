@@ -1,4 +1,4 @@
-name: Astro zu IONOS (SFTP Final)
+name: Astro zu IONOS (Finaler Versuch)
 
 on:
   push:
@@ -29,6 +29,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
+          # Wir nehmen alles aus dem dist-Ordner
           source: "dist/*"
+          # Wir schieben es direkt ins Hauptverzeichnis
           target: "."
+          # Das sorgt dafür, dass nicht der Ordner "dist" erstellt wird, sondern nur der Inhalt
           strip_components: 1
