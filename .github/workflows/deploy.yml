@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Pfad-Fix Final)
+name: Astro zu IONOS (Pfad-Befreiung)
 
 on:
   push:
@@ -22,16 +22,16 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload zwei Ebenen nach oben
+      - name: 🚀 Upload aus dem WP-Ordner heraus
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
-          # Wir nehmen den Inhalt von dist
+          # Wir nehmen ALLES aus dem dist-Ordner
           local_path: './dist/'
-          # JETZT WICHTIG: ../../ klettert aus /wordpress/wp-content/ heraus
-          # direkt in das Verzeichnis, das du in Bild 18 siehst.
+          # ../../ bedeutet: Geh aus /wp-content/ raus, geh aus /wordpress/ raus
+          # Dann landest du im echten Hauptverzeichnis (Root)
           remote_path: '../../'
           sftp_only: true
