@@ -1,4 +1,4 @@
-name: Astro zu IONOS (FTP Stabil)
+name: Astro zu IONOS (SFTP Port 22 Fix)
 
 on:
   push:
@@ -22,16 +22,14 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🚀 Upload via SFTP (Port 22)
+        uses: n0pI/sftp-deploy-action@v1.0.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # WICHTIG: Astro baut in 'dist'
-          local-dir: ./dist/
-          # Wir nutzen den Pfad, den wir im FileZilla Screenshot gesehen haben
-          server-dir: ./
-          # Wir schalten auf Standard FTP zurück, da dein Server 'AUTH' (FTPS) ablehnt
-          protocol: ftp
-          port: 21
+          port: 22
+          localdir: ./dist
+          remotedir: ./
+          # Verhindert Berechtigungskonflikte bei IONOS
+          ssh_shell: true
