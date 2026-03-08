@@ -1,4 +1,4 @@
-name: Astro zu IONOS Final Fix
+name: Astro zu IONOS (Finaler Fix)
 
 on:
   push:
@@ -22,15 +22,15 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload via SFTP (Einzeldatei-Modus)
-        # Korrigierter Name der Action (npl statt n0pI)
+      - name: 🚀 Upload via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
-          local_path: './dist/*'
-          # Punkt steht für das Verzeichnis, das wir in FileZilla gesehen haben
-          remote_path: './'
+          # WICHTIG: Kein Sternchen am Ende, um den gesamten Inhalt von dist zu nehmen
+          local_path: './dist/'
+          # Root-Verzeichnis laut deinem Screenshot
+          remote_path: '/'
           sftp_only: true
