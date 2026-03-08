@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Clean & Sync)
+name: Astro zu IONOS (Gebuendelt & Sauber)
 
 on:
   push:
@@ -22,22 +22,16 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Gebündelter Upload & Cleanup
+      - name: 🚀 Gebuendelter Upload
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # 1. Quelle: Alles aus dem fertigen Astro-Ordner
+          # WICHTIG: Er nimmt den GESAMTEN Inhalt von dist
           local-dir: ./dist/
-          # 2. Ziel: Direkt ins Hauptverzeichnis
+          # Er laedt alles direkt ins Hauptverzeichnis
           server-dir: ./
+          # Nutzt Port 22 (SFTP)
           protocol: sftp
           port: 22
-          # 3. DER REINIGUNGS-BEFEHL:
-          # Das löscht Dateien auf dem Server, die NICHT im Astro-Projekt sind.
-          # VORSICHT: Er löscht auch alte WordPress-Dateien im Hauptordner!
-          dry-run: false
-          dangerous-clean-slate: false
-          # Löscht nur Dateien, die im dist-Ordner nicht existieren:
-          delete-destination-after: true
