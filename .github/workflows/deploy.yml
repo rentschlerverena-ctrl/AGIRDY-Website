@@ -1,4 +1,4 @@
-name: Astro zu IONOS (SFTP Port 22)
+name: Astro zu IONOS (SFTP Final)
 
 on:
   push:
@@ -23,13 +23,12 @@ jobs:
           npm run build
 
       - name: 🚀 Upload via SFTP (Port 22)
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: appleboy/scp-action@v0.1.7
         with:
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
-          server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
-          local_path: './dist/*'
-          # WICHTIG: Prüfe bei IONOS, ob dies dein Zielordner ist
-          remote_path: '/' 
-          sftp_args: '-o ConnectTimeout=5'
+          source: "dist/*"
+          target: "."
+          strip_components: 1
