@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Versuch 2)
+name: Astro zu IONOS (SFTP Port 22)
 
 on:
   push:
@@ -18,20 +18,21 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: 🏗️ Website bauen
+      - name: 🏗️ Astro Build
         run: |
           npm install
           npm run build
 
-      - name: 🚀 Upload zu IONOS
+      - name: 🚀 Upload via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # WICHTIG: Astro baut alles in den 'dist' Ordner
           local-dir: ./dist/
-          # Falls deine Domain in einen Unterordner zeigt, trage ihn hier ein:
-          server-dir: ./ 
-          # Erzwinge FTP (manche Server mögen das lieber)
-          protocol: ftps
+          # Hier ggf. den Pfad anpassen (meistens / oder /htdocs)
+          server-dir: ./
+          # Deine IONOS-Einstellungen:
+          protocol: sftp
           port: 22
