@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Gebuendelt & Sauber)
+name: Astro zu IONOS (Gebuendelt Fix)
 
 on:
   push:
@@ -22,16 +22,16 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Gebuendelter Upload
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🚀 Sync Inhalt von dist nach Root
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # WICHTIG: Er nimmt den GESAMTEN Inhalt von dist
-          local-dir: ./dist/
-          # Er laedt alles direkt ins Hauptverzeichnis
-          server-dir: ./
-          # Nutzt Port 22 (SFTP)
-          protocol: sftp
           port: 22
+          # Das ist der wichtigste Teil:
+          # local_path mit '*' nimmt nur den INHALT, nicht den Ordner 'dist' selbst
+          local_path: './dist/*'
+          # remote_path '/' legt es direkt ins Hauptverzeichnis
+          remote_path: '/'
+          sftp_only: true
