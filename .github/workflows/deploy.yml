@@ -1,4 +1,4 @@
-name: Astro zu IONOS Final
+name: Astro zu IONOS Final Fix
 
 on:
   push:
@@ -22,16 +22,15 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload via FTP (Stabil)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🚀 Upload via SFTP (Einzeldatei-Modus)
+        # Korrigierter Name der Action (npl statt n0pI)
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Astro baut in diesen Ordner
-          local-dir: ./dist/
-          # Dein Pfad aus dem FileZilla-Screenshot
-          server-dir: ./
-          # Wir nutzen Standard FTP, um den 'AUTH' Fehler zu vermeiden
-          protocol: FTP 
           port: 22
+          local_path: './dist/*'
+          # Punkt steht für das Verzeichnis, das wir in FileZilla gesehen haben
+          remote_path: './'
+          sftp_only: true
