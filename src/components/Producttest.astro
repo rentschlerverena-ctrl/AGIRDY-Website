@@ -1,0 +1,256 @@
+---
+/* src/components/Producttest.astro */
+const { productData } = Astro.props;
+
+if (!productData) {
+  console.error("Producttest: Keine Daten empfangen!");
+}
+---
+
+<section class="what-we-do" id="product">
+  <div class="container">
+    
+    <div class="title-row">
+      <h2 class="section-title">{productData?.title || "AGIRDY CORE"}</h2>
+      <p class="section-title-sub">{productData?.subtitle || "The Intelligence Infrastructure"}</p>
+    </div>
+
+    <div class="product-stage">
+      
+      <div class="focus-area">
+        
+        <div class="image-card-fixed">
+          <div class="card image-card">
+            <div class="image-inner">
+              <img src="/product-brain.jpg" alt="Agirdy Core Visual" class="main-img" />
+              <div class="vignette-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-viewport" id="carouselViewport">
+          <div class="carousel-track" id="carouselTrack">
+            {productData?.features?.map((item, index) => (
+              <div class="carousel-item" data-index={index}>
+                <div class="card feature-card">
+                  <div class="card-header">
+                    <span class="card-subtitle">Feature {item.id}</span>
+                    <h3 class="card-title">{item.title}</h3>
+                  </div>
+                  <div class="card-desc">
+                    <p>{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button id="prevBtn" class="ctrl-btn" aria-label="Previous">‹</button>
+        <button id="nextBtn" class="ctrl-btn" aria-label="Next">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-we-do {
+    position: relative;
+    padding: 120px 0;
+    background: transparent;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .title-row {
+    width: 100%;
+    padding-left: 15%; /* Exakt wie global.css */
+    margin-bottom: 5rem;
+  }
+
+  .product-stage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* --- FOKUS AREA (Bild + Aktive Karte) --- */
+  .focus-area {
+    position: relative;
+    width: 100%;
+    max-width: 1000px; /* Platz für Bild (400) + Gap (50) + Karte (400) */
+    height: 550px;
+    display: flex;
+    align-items: center;
+    /* Damit nachfolgende Karten rechts aus dem Container ragen können */
+    overflow: visible; 
+  }
+
+  /* FIXIERTES BILD LINKS */
+  .image-card-fixed {
+    flex: 0 0 400px;
+    height: 500px;
+    z-index: 100; /* Immer oben auf, falls Karten darunter gleiten */
+    margin-right: 50px; /* DER ABSTAND ZUR TEXTKARTE */
+  }
+
+  .image-card {
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+    background: var(--surface);
+  }
+
+  .image-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+
+  .vignette-overlay {
+    position: absolute;
+    inset: 0;
+    /* Stärkerer Verlauf nach rechts, damit Karten "unter" dem Bild verschwinden */
+    background: linear-gradient(to right, transparent 40%, var(--bg) 100%);
+  }
+
+  /* --- KARUSSELL VIEWPORT --- */
+  .carousel-viewport {
+    flex: 1;
+    overflow: visible; /* Wichtig, um Karten von rechts zu sehen */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 50;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 80px; /* Abstand zwischen den Inhaltskarten selbst */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .carousel-item {
+    flex: 0 0 400px;
+    transition: all 0.6s ease;
+    opacity: 0.3; /* Inaktive Karten rechts sind leicht sichtbar */
+    transform: scale(0.9);
+  }
+
+  .carousel-item.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Apple-Style Card Look */
+  .feature-card {
+    min-height: 450px;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  /* --- STEUERUNG --- */
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 60px;
+    width: 100%;
+    z-index: 120;
+  }
+
+  .ctrl-btn {
+    background: rgba(17, 24, 31, 0.8);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+
+  .ctrl-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  /* Mobile: Bild ausblenden, nur Karussell zeigen */
+  @media (max-width: 1024px) {
+    .title-row { padding-left: 6%; }
+    .image-card-fixed { display: none; }
+    .focus-area { justify-content: center; max-width: 100%; }
+    .carousel-track { padding-left: 0; }
+  }
+</style>
+
+<script>
+  const track = document.getElementById('carouselTrack');
+  const items = document.querySelectorAll('.carousel-item');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  
+  let currentIndex = 0;
+
+  function updateCarousel() {
+    if (!track || items.length === 0) return;
+
+    const itemWidth = (items[0] as HTMLElement).offsetWidth;
+    const gap = 80; // Abstand zwischen den Textkarten
+    
+    // Die Berechnung schiebt den Track immer so, dass die aktive Karte 
+    // ganz links im Viewport (direkt neben dem Bild-Abstand) steht.
+    const moveAmount = currentIndex * (itemWidth + gap);
+
+    track.style.transform = `translateX(-${moveAmount}px)`;
+
+    items.forEach((item, i) => {
+      item.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  nextBtn?.addEventListener('click', () => {
+    if (currentIndex < items.length - 1) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  prevBtn?.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  // Init
+  updateCarousel();
+  window.addEventListener('resize', updateCarousel);
+</script>

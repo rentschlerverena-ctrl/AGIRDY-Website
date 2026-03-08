@@ -20,10 +20,11 @@ const targetPath = lang === 'en' ? '/de' : '/';
       
       <li class="dropdown">
         <div class="dropdown-trigger-wrapper">
-          <a href={`${homePath}#product`}>{lang === 'en' ? 'PRODUCT' : 'PRODUKT'}</a>
+          <a href={`${homePath}#product`}>{lang === 'en' ? 'SOLUTION' : 'LÖSUNG'}</a>
           <span class="chevron">▾</span>
         </div>
         <ul class="dropdown-menu">
+          <li><a href={`${homePath}#product`}>PRODUCT</a></li>
           <li><a href={`${homePath}#roadmap`}>ROADMAP</a></li>
         </ul>
       </li>

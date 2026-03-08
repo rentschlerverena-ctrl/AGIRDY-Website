@@ -6,7 +6,7 @@ import "../styles/global.css";
 import teamData from '../data/en/team.json';
 import whatwedoData from '../data/en/whatwedo.json';
 import visionData from '../data/en/vision.json';
-import productData from '../data/en/product.json';
+import productData from '../data/en/product.json'; // Diese Daten nutzen wir
 import roadmapData from '../data/en/roadmap.json';
 import contactData from '../data/en/contact.json';
 import introData from '../data/en/intro.json';
@@ -17,7 +17,8 @@ import Hero from "../components/Hero.astro";
 import WhoWeAre from "../components/WhoWeAre.astro"; 
 import WhatWeDoSection from '../components/WhatWeDo.astro';
 import Vision from '../components/Vision.astro';
-import Product from '../components/Product.astro';
+import Product from '../components/Product.astro'; // Kann weg, wenn Test fertig ist
+import Producttest from '../components/Producttest.astro';
 import Roadmap from '../components/Roadmap.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
@@ -42,19 +43,14 @@ const lang = "en";
 
     <main>
       <Hero />
-
       <Intro introData={introData} />
-      
       <WhoWeAre teamData={teamData} />
-      
       <WhatWeDoSection whatwedoData={whatwedoData} />
-      
       <Vision visionData={visionData} />
-      
       <Product productData={productData} />
+      <Producttest productData={productData} />
       
       <Roadmap roadmapData={roadmapData} />
-      
       <Contact contactData={contactData} />
     </main>
 
