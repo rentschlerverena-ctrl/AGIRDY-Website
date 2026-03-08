@@ -33,5 +33,5 @@ jobs:
           # Falls deine Domain in einen Unterordner zeigt, trage ihn hier ein:
           server-dir: ./ 
           # Erzwinge FTP (manche Server mögen das lieber)
-          protocol: SFTP
+          protocol: ftps
           port: 22
