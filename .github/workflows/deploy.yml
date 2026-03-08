@@ -1,4 +1,4 @@
-name: Astro zu IONOS (FTPS Version)
+name: Astro zu IONOS (FTP Stabil)
 
 on:
   push:
@@ -16,23 +16,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: 🏗️ Astro Build
         run: |
           npm install
           npm run build
 
-      - name: 🚀 Upload via FTPS
+      - name: 🚀 Upload via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Astro Build-Ordner
+          # WICHTIG: Astro baut in 'dist'
           local-dir: ./dist/
-          # Zielordner auf dem IONOS Server
+          # Wir nutzen den Pfad, den wir im FileZilla Screenshot gesehen haben
           server-dir: ./
-          # IONOS nutzt Port 21 für sicheres FTPS
-          protocol: ftps
+          # Wir schalten auf Standard FTP zurück, da dein Server 'AUTH' (FTPS) ablehnt
+          protocol: ftp
           port: 21
