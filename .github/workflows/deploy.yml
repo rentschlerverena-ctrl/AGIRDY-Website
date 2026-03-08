@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Finaler Fix)
+name: Astro zu IONOS (Clean & Sync)
 
 on:
   push:
@@ -22,15 +22,22 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: 🚀 Gebündelter Upload & Cleanup
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # 1. Quelle: Alles aus dem fertigen Astro-Ordner
+          local-dir: ./dist/
+          # 2. Ziel: Direkt ins Hauptverzeichnis
+          server-dir: ./
+          protocol: sftp
           port: 22
-          # WICHTIG: Kein Sternchen am Ende, um den gesamten Inhalt von dist zu nehmen
-          local_path: './dist/'
-          # Root-Verzeichnis laut deinem Screenshot
-          remote_path: '/'
-          sftp_only: true
+          # 3. DER REINIGUNGS-BEFEHL:
+          # Das löscht Dateien auf dem Server, die NICHT im Astro-Projekt sind.
+          # VORSICHT: Er löscht auch alte WordPress-Dateien im Hauptordner!
+          dry-run: false
+          dangerous-clean-slate: false
+          # Löscht nur Dateien, die im dist-Ordner nicht existieren:
+          delete-destination-after: true
