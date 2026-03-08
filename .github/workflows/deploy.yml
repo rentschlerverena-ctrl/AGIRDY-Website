@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Finaler Versuch)
+name: Astro zu IONOS (Schritt 1 - SFTP Fix)
 
 on:
   push:
@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: 🏗️ Astro Build
         run: |
@@ -29,9 +30,11 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
-          # Wir nehmen alles aus dem dist-Ordner
+          # Wir nehmen den Inhalt des Astro-Build-Ordners
           source: "dist/*"
-          # Wir schieben es direkt ins Hauptverzeichnis
-          target: "."
-          # Das sorgt dafür, dass nicht der Ordner "dist" erstellt wird, sondern nur der Inhalt
+          # Wir nutzen den relativen Pfad zum Home-Verzeichnis des Users
+          target: "./"
+          # Verhindert, dass ein Unterordner "dist" auf dem Server erstellt wird
           strip_components: 1
+          # Erhöhtes Timeout, falls IONOS langsam antwortet
+          timeout: 60s
