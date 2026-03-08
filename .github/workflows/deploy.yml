@@ -1,4 +1,4 @@
-name: Astro zu IONOS (Schritt 1 - SFTP Fix)
+name: Astro zu IONOS (FTPS Version)
 
 on:
   push:
@@ -23,18 +23,16 @@ jobs:
           npm install
           npm run build
 
-      - name: 🚀 Upload via SFTP (Port 22)
-        uses: appleboy/scp-action@v0.1.7
+      - name: 🚀 Upload via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          # Wir nehmen den Inhalt des Astro-Build-Ordners
-          source: "dist/*"
-          # Wir nutzen den relativen Pfad zum Home-Verzeichnis des Users
-          target: "./"
-          # Verhindert, dass ein Unterordner "dist" auf dem Server erstellt wird
-          strip_components: 1
-          # Erhöhtes Timeout, falls IONOS langsam antwortet
-          timeout: 60s
+          # Astro Build-Ordner
+          local-dir: ./dist/
+          # Zielordner auf dem IONOS Server
+          server-dir: ./
+          # IONOS nutzt Port 21 für sicheres FTPS
+          protocol: ftps
+          port: 21
