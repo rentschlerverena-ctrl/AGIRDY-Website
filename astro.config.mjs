@@ -1,8 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // Deine GitHub-URL
-  site: 'https://rentschlerverena-ctrl.github.io',
-  // Der Name deines Repositories (WICHTIG!)
-  base: '/AGIRDY-Website', 
+  site: 'https://agirdy.com',
+  base: '/', // WICHTIG: Hier muss jetzt nur noch der Schrägstrich stehen!
 });
