@@ -1,37 +1,39 @@
-name: Astro zu IONOS (Pfad-Befreiung)
+name: Deploy Astro site to Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Code holen
+      - name: Checkout
         uses: actions/checkout@v4
+      - name: Install, build, and upload with Astro
+        uses: withastro/action@v3
+        # Wenn du npm nutzt (Standard):
+        # with:
+        #   path: . 
 
-      - name: ⚙️ Node installieren
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+ # ... dein Build-Teil (npm install, npm run build) ...
 
-      - name: 🏗️ Astro Build
-        run: |
-          npm install
-          npm run build
-
-      - name: 🚀 Upload aus dem WP-Ordner heraus
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          username: ${{ secrets.FTP_USERNAME }}
-          server: ${{ secrets.FTP_SERVER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          # Wir nehmen ALLES aus dem dist-Ordner
-          local_path: './dist/'
-          # ../../ bedeutet: Geh aus /wp-content/ raus, geh aus /wordpress/ raus
-          # Dann landest du im echten Hauptverzeichnis (Root)
-          remote_path: '../../'
-          sftp_only: true
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
