@@ -1,5 +1,8 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // Deine GitHub-URL
+  site: 'https://rentschlerverena-ctrl.github.io',
+  // Der Name deines Repositories (WICHTIG!)
+  base: '/main', 
+});
