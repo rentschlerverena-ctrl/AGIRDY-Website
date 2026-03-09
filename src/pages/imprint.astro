@@ -1,8 +1,7 @@
 ---
-/* src/pages/imprint.astro */
+/* src/pages/en/imprint.astro */
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-
 const lang = 'en';
 ---
 
@@ -14,78 +13,20 @@ const lang = 'en';
   <title>Imprint | AGIRDY</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --accent: #adff2f;
-      --text: #ffffff;
-      --bg: #0a0f14;
-      --muted: rgba(255, 255, 255, 0.5);
-    }
-
+    :root { --accent: #adff2f; --bg: #0a0f14; --text: #ffffff; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Lato', sans-serif;
-      line-height: 1.6;
-    }
-
-    .legal-page {
-      padding: 180px 0 100px;
-      min-height: 100vh;
-    }
-
-    .legal-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
-
-    .legal-header {
-      margin-bottom: 80px;
-    }
-
-    .archivo-title {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
+    body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
+    .legal-page { padding: 180px 0 100px; min-height: 100vh; }
+    .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
+    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; text-transform: uppercase; }
     .dot { color: var(--accent); }
-
-    .accent-line {
-      width: 80px;
-      height: 4px;
-      background: var(--accent);
-    }
-
-    .legal-block {
-      margin-bottom: 60px;
-    }
-
-    .legal-block h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .legal-block h2::before {
-      content: "";
-      width: 4px;
-      height: 24px;
-      background: var(--accent);
-    }
-
-    .legal-block p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      white-space: pre-line;
-    }
+    .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
+    .legal-block { margin-bottom: 50px; }
+    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; letter-spacing: 1px; }
+    .legal-block p { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 10px; }
+    .legal-block strong { color: #fff; }
+    .legal-block a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+    .legal-block a:hover { border-bottom: 1px solid var(--accent); }
   </style>
 </head>
 <body>
@@ -93,52 +34,52 @@ const lang = 'en';
   
   <main class="legal-page">
     <div class="legal-container">
-      <header class="legal-header">
-        <h1 class="archivo-title">IMPRINT<span class="dot">.</span></h1>
-        <div class="accent-line"></div>
-      </header>
+      <h1 class="archivo-title">Imprint<span class="dot">.</span></h1>
+      <div class="accent-line"></div>
+      
+      <div class="legal-block">
+        <h2>Information according to § 5 TMG</h2>
+        <p>
+          <strong>AGIRDY GmbH</strong><br />
+          Ella-Ehlers-Weg 6<br />
+          28279 Bremen, Germany
+        </p>
+      </div>
 
-      <section class="legal-content">
-        <div class="legal-block">
-          <h2>Information according to § 5 TMG</h2>
-          <p>
-            AGIRDY GmbH
-            Musterstraße 123
-            12345 Musterstadt
-            Germany
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>Represented by</h2>
+        <p>Philipp Feindert, Jan Junge</p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Represented by</h2>
-          <p>Max Mustermann (CEO)</p>
-        </div>
+      <div class="legal-block">
+        <h2>Contact</h2>
+        <p>E-Mail: <a href="mailto:mail@agirdy.com">mail@agirdy.com</a></p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Contact</h2>
-          <p>
-            Phone: +49 (0) 123 456789
-            Email: info@agirdy.com
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>Register Entry</h2>
+        <p>Entry in the commercial register.</p>
+        <p><strong>Register Court:</strong> Local Court (Amtsgericht) Bremen</p>
+        <p><strong>Register Number:</strong> HRB 42085</p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Register Entry</h2>
-          <p>
-            Entry in the commercial register.
-            Register Court: Amtsgericht Musterstadt
-            Register Number: HRB 12345
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>VAT ID</h2>
+        <p>Value added tax identification number according to § 27 a Value Added Tax Act:</p>
+        <p><strong>DE 458904346</strong></p>
+      </div>
 
-        <div class="legal-block">
-          <h2>VAT ID</h2>
-          <p>
-            VAT identification number according to § 27 a Umsatzsteuergesetz:
-            DE 123 456 789
-          </p>
-        </div>
-      </section>
+      <div class="legal-block">
+        <h2>EU Dispute Resolution</h2>
+        <p>The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.</p>
+        <p>Our e-mail address can be found above in the imprint.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Dispute Resolution for Consumers</h2>
+        <p>We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+      </div>
+
     </div>
   </main>
 

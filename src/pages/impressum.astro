@@ -2,7 +2,6 @@
 /* src/pages/impressum.astro */
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-
 const lang = 'de';
 ---
 
@@ -14,60 +13,20 @@ const lang = 'de';
   <title>Impressum | AGIRDY</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    /* Gleiche Styles wie oben für Konsistenz */
-    :root {
-      --accent: #adff2f;
-      --text: #ffffff;
-      --bg: #0a0f14;
-      --muted: rgba(255, 255, 255, 0.5);
-    }
-
+    :root { --accent: #adff2f; --bg: #0a0f14; --text: #ffffff; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Lato', sans-serif;
-      line-height: 1.6;
-    }
-
+    body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
     .legal-page { padding: 180px 0 100px; min-height: 100vh; }
     .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
-    .legal-header { margin-bottom: 80px; }
-
-    .archivo-title {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
+    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; text-transform: uppercase; }
     .dot { color: var(--accent); }
-    .accent-line { width: 80px; height: 4px; background: var(--accent); }
-    .legal-block { margin-bottom: 60px; }
-
-    .legal-block h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .legal-block h2::before {
-      content: "";
-      width: 4px;
-      height: 24px;
-      background: var(--accent);
-    }
-
-    .legal-block p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      white-space: pre-line;
-    }
+    .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
+    .legal-block { margin-bottom: 50px; }
+    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; letter-spacing: 1px; }
+    .legal-block p { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 10px; }
+    .legal-block strong { color: #fff; }
+    .legal-block a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+    .legal-block a:hover { border-bottom: 1px solid var(--accent); }
   </style>
 </head>
 <body>
@@ -75,49 +34,52 @@ const lang = 'de';
   
   <main class="legal-page">
     <div class="legal-container">
-      <header class="legal-header">
-        <h1 class="archivo-title">IMPRESSUM<span class="dot">.</span></h1>
-        <div class="accent-line"></div>
-      </header>
+      <h1 class="archivo-title">Impressum<span class="dot">.</span></h1>
+      <div class="accent-line"></div>
+      
+      <div class="legal-block">
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <p>
+          <strong>AGIRDY GmbH</strong><br />
+          Ella-Ehlers-Weg 6<br />
+          28279 Bremen
+        </p>
+      </div>
 
-      <section class="legal-content">
-        <div class="legal-block">
-          <h2>Angaben gemäß § 5 TMG</h2>
-          <p>
-            AGIRDY GmbH
-            Ella-Ehlers-Weg 6
-            28279 Bremen
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>Vertreten durch</h2>
+        <p>Philipp Feindert, Jan Junge</p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Geschäftsführende Gesellschafter</h2>
-          <p>Philipp Feindert
-                Jan Junge</p>
-        </div>
+      <div class="legal-block">
+        <h2>Kontakt</h2>
+        <p>E-Mail: <a href="mailto:mail@agirdy.com">mail@agirdy.com</a></p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Kontakt</h2>
-          <p>E-Mail: mail@agirdy.com
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>Registereintrag</h2>
+        <p>Eintragung im Handelsregister.</p>
+        <p><strong>Registergericht:</strong> Amtsgericht Bremen</p>
+        <p><strong>Registernummer:</strong> HRB 42085</p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Registereintrag</h2>
-          <p>
-            Registernummer: HRB 42085
-            Registergericht: Amtsgericht Bremen
-          </p>
-        </div>
+      <div class="legal-block">
+        <h2>Umsatzsteuer-ID</h2>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:</p>
+        <p><strong>DE 458904346</strong></p>
+      </div>
 
-        <div class="legal-block">
-          <h2>Umsatzsteuer-ID</h2>
-          <p>
-            Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
-            DE 458904346
-          </p>
-        </div>
-      </section>
+      <div class="legal-block">
+        <h2>EU-Streitschlichtung</h2>
+        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.</p>
+        <p>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+      </div>
+
     </div>
   </main>
 

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 const lang = 'de';
 ---
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -17,35 +18,89 @@ const lang = 'de';
     body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
     .legal-page { padding: 180px 0 100px; min-height: 100vh; }
     .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
-    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; }
+    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; text-transform: uppercase; }
     .dot { color: var(--accent); }
     .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
-    .legal-block { margin-bottom: 40px; }
-    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 15px; border-left: 3px solid var(--accent); padding-left: 15px; }
-    .legal-block p { color: rgba(255, 255, 255, 0.6); font-size: 1.1rem; }
+    .legal-block { margin-bottom: 50px; }
+    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; letter-spacing: 1px; }
+    .legal-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; margin: 25px 0 10px; color: var(--accent); }
+    .legal-block h4 { font-size: 1.1rem; margin: 15px 0 5px; color: var(--text); font-weight: 700; }
+    .legal-block p { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 15px; }
+    .legal-block a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+    .legal-block a:hover { border-bottom: 1px solid var(--accent); }
+    strong { color: #fff; }
   </style>
 </head>
 <body>
   <Navbar lang={lang} />
   <main class="legal-page">
     <div class="legal-container">
-      <h1 class="archivo-title">DATENSCHUTZ<span class="dot">.</span></h1>
+      <h1 class="archivo-title">Datenschutz<wbr/>erklärung<span class="dot">.</span></h1>
       <div class="accent-line"></div>
       
       <div class="legal-block">
         <h2>1. Datenschutz auf einen Blick</h2>
-        <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Personenbezogene Daten werden auf dieser Webseite nur im technisch notwendigen Umfang erhoben.</p>
+        <h3>Hinweis zur verantwortlichen Stelle</h3>
+        <p>
+          <strong>AGIRDY GmbH</strong><br />
+          Ella-Ehlers-Weg 6, 28279 Bremen<br />
+          E-Mail: mail@agirdy.com
+        </p>
+        <h3>Rechte der Betroffenen</h3>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese jederzeit für die Zukunft widerrufen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
       </div>
 
       <div class="legal-block">
-        <h2>2. Hosting und Content Delivery Networks (CDN)</h2>
-        <p>Unsere Website wird bei Vercel gehostet. Die Datenschutzerklärung von Vercel finden Sie auf deren offizieller Website.</p>
+        <h2>2. Hosting & Datenerfassung</h2>
+        <h3>IONOS & Server-Log-Dateien</h3>
+        <p>Wir hosten unsere Website bei <strong>IONOS (IONOS SE, Montabaur)</strong>. Der Provider erhebt automatisch Server-Log-Dateien (z. B. IP-Adresse, Browsertyp, Uhrzeit). Die Nutzung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO im Interesse einer sicheren und fehlerfreien Bereitstellung unserer Website.</p>
+        <h3>SSL- bzw. TLS-Verschlüsselung</h3>
+        <p>Diese Seite nutzt aus Sicherheitsgründen eine SSL- bzw. TLS-Verschlüsselung, damit Daten, die Sie an uns senden, nicht von Dritten mitgelesen werden können.</p>
       </div>
 
       <div class="legal-block">
-        <h2>3. Ihre Rechte</h2>
-        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung.</p>
+        <h2>3. Soziale Medien & Plugins</h2>
+
+        <h3>X (ehemals Twitter)</h3>
+        <p>
+          Auf dieser Website sind Funktionen des Dienstes X (ehemals Twitter) eingebunden (Anbieter: X Corp., USA). 
+          Für Nutzer außerhalb der USA ist die Twitter International Unlimited Company in Irland verantwortlich. 
+          Die Nutzung erfolgt auf Grundlage Ihrer Einwilligung (<strong>Art. 6 Abs. 1 lit. a DSGVO</strong>). Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission und das EU-US Data Privacy Framework gestützt. 
+          Infos: <a href="https://x.com/de/privacy" target="_blank">https://x.com/de/privacy</a>.
+        </p>
+
+        <h3>Instagram</h3>
+        <p>
+          Anbieter ist die Meta Platforms Ireland Limited. Wir sind mit Meta gemeinsam verantwortlich gemäß <strong>Art. 26 DSGVO</strong> für die Erfassung und Weiterleitung der Daten. Die nachfolgende Verarbeitung durch Meta liegt in deren alleiniger Verantwortung.
+          Die Nutzung erfolgt auf Grundlage Ihrer Einwilligung (<strong>Art. 6 Abs. 1 lit. a DSGVO</strong>). 
+          Details zur Vereinbarung: <a href="https://www.facebook.com/legal/controller_addendum" target="_blank">Controller Addendum</a>. 
+          Datenschutz: <a href="https://privacycenter.instagram.com/policy/" target="_blank">Instagram Policy</a>.
+        </p>
+
+        <h3>YouTube mit erweitertem Datenschutz</h3>
+        <p>
+          Wir binden Videos von YouTube (Google Ireland Limited) ein. Wir nutzen den <strong>erweiterten Datenschutzmodus</strong>. Laut YouTube werden dabei keine Cookies, sondern Local Storage Elemente zur Speicherung technischer Daten verwendet. 
+          Die Nutzung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO. 
+          Infos: <a href="https://policies.google.com/privacy?hl=de" target="_blank">Google Privacy</a>.
+        </p>
       </div>
+
+      <div class="legal-block">
+        <h2>4. Analyse-Tools</h2>
+        <h3>IONOS WebAnalytics</h3>
+        <p>Wir nutzen IONOS WebAnalytics zur statistischen Auswertung. Laut Anbieter werden dabei keine Cookies gespeichert und die Daten vollständig anonymisiert erfasst (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <h3>WP Statistics</h3>
+        <p>Diese Website nutzt das Analysetool WP Statistics zur lokalen, anonymisierten Analyse des Nutzerverhaltens direkt auf unserem Server.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>5. Plugins und Tools</h2>
+        <h3>Google Fonts (lokales Hosting)</h3>
+        <p>
+          Diese Seite nutzt Google Fonts zur einheitlichen Darstellung von Schriftarten. Die Fonts sind <strong>lokal installiert</strong>. Eine Verbindung zu Servern von Google findet nicht statt.
+        </p>
+      </div>
+
     </div>
   </main>
   <Footer lang={lang} />
