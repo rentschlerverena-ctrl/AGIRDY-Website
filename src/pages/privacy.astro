@@ -2,6 +2,8 @@
 /* src/pages/en/privacy.astro */
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import privacyData from '/src/data/en/privacy.json'; 
+
 const lang = 'en';
 ---
 
@@ -10,97 +12,108 @@ const lang = 'en';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy | AGIRDY</title>
+  <title>{privacyData.pageTitle} | AGIRDY</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  
   <style>
+    /* Exakter Stil aus deinem Original */
     :root { --accent: #adff2f; --bg: #0a0f14; --text: #ffffff; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background-color: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; line-height: 1.6; }
-    .legal-page { padding: 180px 0 100px; min-height: 100vh; }
-    .legal-container { max-width: 900px; margin: 0 auto; padding: 0 5%; }
-    .archivo-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 10px; text-transform: uppercase; }
+    
+    body { 
+      background-color: var(--bg); 
+      color: var(--text); 
+      font-family: 'Lato', sans-serif; 
+      line-height: 1.6; 
+    }
+
+    .legal-page { 
+      padding: 180px 0 100px; 
+      min-height: 100vh; 
+    }
+
+    .legal-container { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      padding: 0 5%; 
+    }
+
+    .archivo-title { 
+      font-family: 'Archivo Black', sans-serif; 
+      font-size: clamp(2.5rem, 8vw, 4rem); 
+      margin-bottom: 10px; 
+      text-transform: uppercase; 
+    }
+    
     .dot { color: var(--accent); }
-    .accent-line { width: 80px; height: 4px; background: var(--accent); margin-bottom: 60px; }
+    
+    .accent-line { 
+      width: 80px; 
+      height: 4px; 
+      background: var(--accent); 
+      margin-bottom: 60px; 
+    }
+
     .legal-block { margin-bottom: 50px; }
-    .legal-block h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; letter-spacing: 1px; }
-    .legal-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; margin: 25px 0 10px; color: var(--accent); }
-    .legal-block p { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; margin-bottom: 15px; }
-    .legal-block a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+
+    .legal-block h2 { 
+      font-family: 'Bebas Neue', sans-serif; 
+      font-size: 2.2rem; 
+      margin-bottom: 20px; 
+      border-left: 3px solid var(--accent); 
+      padding-left: 15px; 
+      letter-spacing: 1px; 
+    }
+    
+    .legal-block h3 { 
+      font-family: 'Bebas Neue', sans-serif; 
+      font-size: 1.5rem; 
+      margin: 25px 0 10px; 
+      color: var(--accent); 
+    }
+    
+    .legal-block p { 
+      color: rgba(255, 255, 255, 0.7); 
+      font-size: 1.05rem; 
+      margin-bottom: 15px; 
+    }
+    
+    .legal-block a { 
+      color: var(--accent); 
+      text-decoration: none; 
+      border-bottom: 1px solid transparent; 
+      transition: 0.3s; 
+    }
+    
     .legal-block a:hover { border-bottom: 1px solid var(--accent); }
+    
     strong { color: #fff; }
   </style>
 </head>
+
 <body>
   <Navbar lang={lang} />
+
   <main class="legal-page">
     <div class="legal-container">
       <h1 class="archivo-title">Privacy<wbr/>Policy<span class="dot">.</span></h1>
       <div class="accent-line"></div>
       
-      <div class="legal-block">
-        <h2>1. Privacy at a Glance</h2>
-        <h3>Information on the Responsible Party</h3>
-        <p>
-          <strong>AGIRDY GmbH</strong><br />
-          Ella-Ehlers-Weg 6, 28279 Bremen, Germany<br />
-          E-Mail: mail@agirdy.com
-        </p>
-        <h3>Rights of Data Subjects</h3>
-        <p>You have the right to receive information about the origin, recipient, and purpose of your stored personal data at any time free of charge. You also have the right to demand the correction or deletion of this data. If you have given your consent to data processing, you can revoke this consent at any time for the future. Furthermore, you have the right to lodge a complaint with the competent supervisory authority.</p>
-      </div>
-
-      <div class="legal-block">
-        <h2>2. Hosting & Data Collection</h2>
-        <h3>IONOS & Server Log Files</h3>
-        <p>We host our website at <strong>IONOS (IONOS SE, Montabaur)</strong>. The provider automatically collects server log files (e.g., IP address, browser type, time). This is based on Art. 6 (1) (f) GDPR in the interest of a secure and error-free provision of our website.</p>
-        <h3>SSL or TLS Encryption</h3>
-        <p>For security reasons, this site uses SSL or TLS encryption to prevent third parties from reading data you send to us.</p>
-      </div>
-
-      <div class="legal-block">
-        <h2>3. Social Media & Plugins</h2>
-
-        <h3>X (formerly Twitter)</h3>
-        <p>
-          Functions of the X service (provider: X Corp., USA) are integrated into this website. For users outside the USA, Twitter International Unlimited Company in Ireland is responsible. 
-          The use is based on your consent (<strong>Art. 6 (1) (a) GDPR</strong>). Data transfer to the USA is based on the EU Commission's Standard Contractual Clauses and the EU-US Data Privacy Framework. 
-          More info: <a href="https://x.com/en/privacy" target="_blank">https://x.com/en/privacy</a>.
-        </p>
-
-        <h3>Instagram</h3>
-        <p>
-          The provider is Meta Platforms Ireland Limited. We are jointly responsible with Meta according to <strong>Art. 26 GDPR</strong> for the collection and transmission of data. Subsequent processing by Meta is their sole responsibility.
-          The use is based on your consent (<strong>Art. 6 (1) (a) GDPR</strong>). 
-          Agreement details: <a href="https://www.facebook.com/legal/controller_addendum" target="_blank">Controller Addendum</a>. 
-          Privacy: <a href="https://privacycenter.instagram.com/policy/" target="_blank">Instagram Policy</a>.
-        </p>
-
-        <h3>YouTube with Enhanced Privacy</h3>
-        <p>
-          We embed videos from YouTube (Google Ireland Limited). We use the <strong>enhanced privacy mode</strong>. According to YouTube, no cookies are used, but local storage elements are used to store technical data. 
-          The use is based on Art. 6 (1) (a) GDPR. 
-          Info: <a href="https://policies.google.com/privacy?hl=en" target="_blank">Google Privacy</a>.
-        </p>
-      </div>
-
-      <div class="legal-block">
-        <h2>4. Analysis Tools</h2>
-        <h3>IONOS WebAnalytics</h3>
-        <p>We use IONOS WebAnalytics for statistical evaluation. According to the provider, no cookies are stored and the data is collected completely anonymously (Legal basis: Art. 6 (1) (f) GDPR).</p>
-        <h3>WP Statistics</h3>
-        <p>This website uses the WP Statistics analysis tool for local, anonymous analysis of user behavior directly on our server.</p>
-      </div>
-
-      <div class="legal-block">
-        <h2>5. Plugins and Tools</h2>
-        <h3>Google Fonts (Local Hosting)</h3>
-        <p>
-          This site uses Google Fonts for the uniform display of fonts. The fonts are <strong>locally installed</strong>. No connection to Google servers is established.
-        </p>
-      </div>
-
+      {privacyData.sections.map((section) => (
+        <div class="legal-block">
+          <h2>{section.number}. {section.title}</h2>
+          
+          {section.blocks.map((block) => (
+            <>
+              <h3>{block.subtitle}</h3>
+              <p set:html={block.content}></p>
+            </>
+          ))}
+        </div>
+      ))}
     </div>
   </main>
+
   <Footer lang={lang} />
 </body>
 </html>

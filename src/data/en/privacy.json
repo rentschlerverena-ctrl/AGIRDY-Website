@@ -1,0 +1,152 @@
+{
+  "pageTitle": "Privacy Policy",
+  "sections": [
+    {
+      "number": "1",
+      "title": "Privacy at a Glance",
+      "blocks": [
+        {
+          "subtitle": "General Notes",
+          "content": "The following notes provide a simple overview of what happens to your personal data when you visit this website. Personal data is any data with which you can be personally identified. For detailed information on the subject of data protection, please refer to our privacy policy listed below this text."
+        },
+        {
+          "subtitle": "Data Collection on this Website",
+          "content": "<strong>Who is responsible for data collection?</strong><br>Data processing on this website is carried out by the website operator. You can find their contact details in the 'Information on the Responsible Party' section of this privacy policy or by referring to our Imprint. <br><br> <strong>How do we collect your data?</strong><br>Your data is collected on the one hand by you communicating it to us. This can be, for example, data that you enter in a contact form. Other data is collected automatically by our IT systems or after your consent when you visit the website. This primarily consists of technical data (e.g., web browser, operating system, or time of page access). This data is collected automatically as soon as you enter this website. <br><br><strong>What do we use your data for?</strong><br>Part of the data is collected to ensure the error-free provision of the website. Other data may be used to analyze your user behavior. Insofar as contracts can be concluded or initiated via the website, the transmitted data will also be processed for contract offers, orders, or other order inquiries.<br><br><strong>What rights do you have regarding your data?</strong><br>You have the right at any time to receive information free of charge about the origin, recipient, and purpose of your stored personal data. You also have the right to request the correction or deletion of this data. If you have given your consent to data processing, you can revoke this consent at any time for the future. You also have the right, under certain circumstances, to request the restriction of the processing of your personal data. Furthermore, you have the right to lodge a complaint with the competent supervisory authority. You can contact us at any time regarding these matters or any other questions you may have about data protection."
+        }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Hosting",
+      "blocks": [
+        {
+          "subtitle": "IONOS",
+          "content": " The provider is IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany (hereinafter referred to as IONOS). When you visit our website, IONOS collects various log files, including your IP addresses. For details, please refer to the IONOS privacy policy: <a href=\"https://www.ionos.de/terms-gtc/privacy-policy/\" target=\"_blank\">https://www.ionos.de/terms-gtc/privacy-policy/</a>.<br>The use of IONOS is based on Art. 6 (1) (f) GDPR. We have a legitimate interest in ensuring the most reliable presentation of our website. Insofar as corresponding consent has been requested, processing is carried out exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, to the extent that the consent includes the storage of cookies or access to information in the user's terminal device (e.g., device fingerprinting) within the meaning of the TDDDG. Consent can be revoked at any time.<br><br><strong>Data Processing Agreement (DPA)</strong><br>We have entered into a data processing agreement (DPA) for the use of the aforementioned service. This is a contract required by data protection law, which ensures that the service provider processes the personal data of our website visitors only in accordance with our instructions and in compliance with the GDPR."
+        }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "General Notes and Mandatory Information",
+      "blocks": [
+        {
+          "subtitle": "Data Protection",
+          "content": "The operators of this website take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.<br><br>When you use this website, various personal data are collected. Personal data are data with which you can be personally identified. This privacy policy explains which data we collect and what we use it for. It also explains how and for what purpose this happens.<br><br>We point out that data transmission over the Internet (e.g., when communicating by e-mail) can have security gaps. A complete protection of data against access by third parties is not possible."
+        },
+        {
+          "subtitle": "Information on the Responsible Party",
+          "content": "The responsible party for data processing on this website is:<br><br><strong>AGIRDY GmbH</strong><br>Ella-Ehlers-Weg 6<br>28279 Bremen, Germany <br><br>E-Mail: <a href=\"mailto:mail@agirdy.com\">mail@agirdy.com</a> <br><br>The responsible party is the natural or legal person who, alone or jointly with others, decides on the purposes and means of the processing of personal data (e.g., names, e-mail addresses, etc.)."
+        },
+        {
+          "subtitle": "Storage Duration",
+          "content": "Unless a more specific storage period has been specified within this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke your consent to data processing, your data will be deleted, provided we have no other legally permissible reasons for storing your personal data (e.g., tax or commercial law retention periods); in the latter case, deletion will take place after these reasons no longer apply."
+        },
+         {
+          "subtitle": "General Notes on the Legal Basis for Data Processing on this Website",
+          "content": "If you have consented to data processing, we process your personal data on the basis of Art. 6 (1) (a) GDPR or Art. 9 (2) (a) GDPR, provided that special categories of data according to Art. 9 (1) GDPR are processed. In the case of express consent to the transfer of personal data to third countries, data processing is also based on Art. 49 (1) (a) GDPR. If you have consented to the storage of cookies or to access to information in your terminal device (e.g., via device fingerprinting), the data processing is additionally based on § 25 (1) TDDDG. Consent can be revoked at any time. If your data is required for the fulfillment of a contract or for the implementation of pre-contractual measures, we process your data on the basis of Art. 6 (1) (b) GDPR. Furthermore, we process your data if this is necessary to fulfill a legal obligation on the basis of Art. 6 (1) (c) GDPR. Data processing may also be carried out on the basis of our legitimate interest according to Art. 6 (1) (f) GDPR. Information about the legal basis applicable in each individual case is provided in the following paragraphs of this privacy policy."
+        },
+         {
+          "subtitle": "Recipients of Personal Data",
+          "content": "In the course of our business activities, we work with various external bodies. In some cases, it is also necessary to transfer personal data to these external bodies. We only pass on personal data to external bodies if this is necessary for the fulfillment of a contract, if we are legally obliged to do so (e.g., passing on data to tax authorities), if we have a legitimate interest in passing it on according to Art. 6 (1) (f) GDPR, or if another legal basis allows the data transfer. When using processors, we only pass on the personal data of our customers on the basis of a valid data processing agreement. In the case of joint processing, an agreement on joint processing is concluded."
+        },
+         {
+          "subtitle": "Revocation of Your Consent to Data Processing",
+          "content": "Many data processing operations are only possible with your express consent. You can revoke consent you have already given at any time. The legality of the data processing carried out until the revocation remains unaffected by the revocation."
+        },
+          {
+          "subtitle": "Right to object to data collection in special cases and to direct advertising",
+          "content": "If data processing is based on Art. 6 (1) (e) or (f) GDPR, you have the right at any time to object to the processing of your personal data for reasons arising from your particular situation; this also applies to profiling based on these provisions. The respective legal basis on which processing is based can be found in this privacy policy. If you object, we will no longer process your affected personal data unless we can demonstrate compelling legitimate grounds for the processing which override your interests, rights, and freedoms, or the processing serves to assert, exercise, or defend legal claims (objection according to Art. 21 (1) GDPR).<br><br>If your personal data are processed for the purpose of direct advertising, you have the right to object at any time to the processing of personal data concerning you for the purpose of such advertising; this also applies to profiling insofar as it is associated with such direct advertising. If you object, your personal data will subsequently no longer be used for the purpose of direct advertising (objection according to Art. 21 (2) GDPR)"
+        },
+          {
+          "subtitle": "Right to Lodge a Complaint with the Competent Supervisory Authority",
+          "content": "In the event of violations of the GDPR, data subjects have the right to lodge a complaint with a supervisory authority, in particular in the Member State of their habitual residence, their place of work, or the place of the alleged violation. The right to lodge a complaint is without prejudice to any other administrative or judicial remedies."
+        },
+           {
+          "subtitle": "Right to Data Portability",
+          "content": "You have the right to have data that we process automatically on the basis of your consent or in fulfillment of a contract handed over to you or to a third party in a common, machine-readable format. If you request the direct transfer of the data to another controller, this will only be done insofar as it is technically feasible."
+        },
+          {
+          "subtitle": "Information, Correction, and Deletion",
+          "content": "Within the framework of the applicable legal provisions, you have the right at any time to free information about your stored personal data, its origin and recipients, and the purpose of the data processing and, if applicable, a right to correction or deletion of this data. You can contact us at any time regarding this and other questions on the subject of personal data."
+        },
+              {
+          "subtitle": "Right to Restriction of Processing",
+          "content": "You have the right to request the restriction of the processing of your personal data. You can contact us at any time for this purpose. The right to restriction of processing exists in the following cases:<br><br>• If you dispute the accuracy of your personal data stored by us, we usually need time to verify this. For the duration of the audit, you have the right to request the restriction of the processing of your personal data.• If the processing of your personal data happened/is happening unlawfully, you can request the restriction of data processing instead of deletion. <br>• If we no longer need your personal data, but you need it to exercise, defend, or assert legal claims, you have the right to request the restriction of the processing of your personal data instead of deletion. <br>•If you have lodged an objection pursuant to Art. 21 (1) GDPR, a balance must be struck between your interests and ours. As long as it has not yet been determined whose interests prevail, you have the right to request the restriction of the processing of your personal data. <br><br> If you have restricted the processing of your personal data, this data – apart from its storage – may only be processed with your consent or for the assertion, exercise, or defense of legal claims or for the protection of the rights of another natural or legal person or for reasons of an important public interest of the European Union or a Member State."
+        },
+              {
+          "subtitle": "SSL or TLS Encryption",
+          "content": "For security reasons and to protect the transmission of confidential content, such as orders or inquiries that you send to us as the site operator, this site uses SSL or TLS encryption. You can recognize an encrypted connection by the fact that the address line of the browser changes from http:// to https:// and by the lock symbol in your browser bar. <br> <br>If SSL or TLS encryption is activated, the data you transmit to us cannot be read by third parties."
+        },
+               {
+          "subtitle": "",
+          "content": ""
+        },
+               {
+          "subtitle": "",
+          "content": ""
+        }
+      ]
+    },
+        {
+      "number": "5",
+      "title": "Data collection on this website",
+      "blocks": [
+        {
+          "subtitle": "Cookies",
+          "content": "Our website uses so-called 'cookies'. Cookies are small data packets and do not cause any damage to your terminal device. They are stored either temporarily for the duration of a session (session cookies) or permanently (permanent cookies) on your terminal device. Session cookies are automatically deleted at the end of your visit. Permanent cookies remain stored on your terminal device until you delete them yourself or until they are automatically deleted by your web browser.<br><br>Cookies can originate from us (first-party cookies) or from third-party companies (so-called third-party cookies). Third-party cookies enable the integration of certain services from third-party companies within websites (e.g., cookies for processing payment services).<br><br>Cookies have various functions. Numerous cookies are technically necessary, as certain website functions would not work without them (e.g., the shopping cart function or the display of videos). Other cookies can be used to evaluate user behavior or for advertising purposes.<br><br>Cookies that are required to carry out the electronic communication process, to provide certain functions you desire (e.g., for the shopping cart function), or to optimize the website (e.g., cookies for measuring the web audience) (necessary cookies) are stored on the basis of Art. 6 (1) (f) GDPR, unless another legal basis is specified. The website operator has a legitimate interest in storing necessary cookies for the technically error-free and optimized provision of its services. If consent to the storage of cookies and comparable recognition technologies has been requested, processing takes place exclusively on the basis of this consent (Art. 6 (1) (a) GDPR and § 25 (1) TDDDG); consent can be revoked at any time.<br><br>You can set your browser so that you are informed about the setting of cookies and only allow cookies in individual cases, exclude the acceptance of cookies for certain cases or in general, and activate the automatic deletion of cookies when closing the browser. If cookies are deactivated, the functionality of this website may be limited.<br><br>Insofar as further cookies and services are used on this website, you can find information about this in this privacy policy."
+        },
+        {
+          "subtitle": "Server Log Files",
+          "content": "The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically transmits to us. These are: <br><br>• Browser type and browser version <br> • Operating system used<br>• Referrer URL<br>• Hostname of the accessing computer<br<br>• Time of the server request<br>• IP address<br><br>This data is not merged with other data sources.<br>The collection of this data is based on Art. 6 (1) (f) GDPR. The website operator has a legitimate interest in the technically error-free presentation and optimization of its website – for this purpose, the server log files must be recorded."
+        },
+        {
+          "subtitle": "Contact via Form, E-Mail, or Phone",
+          "content": "If you contact us (e.g., via contact form, e-mail, or phone), your inquiry and all resulting personal data (e.g., name, request) will be stored for the purpose of processing your concern. We do not pass on this data without your consent.<br>The processing is based on Art. 6 (1) (b) GDPR if your request is related to the fulfillment of a contract. In all other cases, it is based on our legitimate interest in effective processing (Art. 6 (1) (f) GDPR) or your consent (Art. 6 (1) (a) GDPR).<br>Your data will remain with us until you request deletion, revoke your consent, or the purpose for storage no longer applies. Mandatory statutory provisions – in particular retention periods – remain unaffected."
+        }
+      ]
+    },
+
+    {
+      "number": "4",
+      "title": "Social Media",
+      "blocks": [
+        {
+          "subtitle": "X (formerly Twitter)",
+          "content": "Functions of the service X (formerly Twitter) are integrated into this website. These functions are offered by X Corp., 1355 Market Street, Suite 900, San Francisco, CA 94103, USA. For persons living outside the USA, the data processing is handled by Twitter International Unlimited Company, One Cumberland Place, Fenian Street, Dublin 2, D02 AX07, Ireland.<br><br>When the social media element is active, a direct connection is established between your terminal device and the X server. X thereby receives information about your visit to this website. By using X and the 'Re-Tweet' or 'Repost' function, the websites you visit are linked to your X account and made known to other users. We point out that we, as the provider of the pages, have no knowledge of the content of the transmitted data or its use by X. For more information, please see the privacy policy of X at: <a href=\"https://x.com/de/privacy \" target=\"_blank\">https://x.com/de/privacy</a>.<br><br>The use of this service is based on your consent according to Art. 6 (1) (a) GDPR and § 25 (1) TDDDG. Consent can be revoked at any time.<br> Data transfer to the USA is based on the Standard Contractual Clauses (SCC) of the EU Commission. Details can be found here:<br><a href=\"https://gdpr.x.com/en/controller-to-controller-transfers.html\" target=\"_blank\">https://gdpr.x.com/en/controller-to-controller-transfers.html</a>.<br><br>You can change your privacy settings on X (formerly Twitter) in the account settings at <a href=\"https://x.com/settings/account\" target=\"_blank\">https://x.com/settings/account/</a>. The company is certified under the 'EU-US Data Privacy Framework; (DPF). The DPF is an agreement between the European Union and the USA aimed at ensuring compliance with European data protection standards for data processing in the USA. Every company certified under the DPF commits to complying with these data protection standards. Further information can be obtained from the provider at the following link:<br> <a href=\"https://www.dataprivacyframework.gov/participant/2710\" target=\"_blank\">https://www.dataprivacyframework.gov/participant/2710</a>. <br><br>The company holds a certification under the 'EU-U.S. Data Privacy Framework' (DPF). The DPF is an agreement between the European Union and the USA designed to ensure compliance with European data protection standards for data processing within the United States. Every company certified under the DPF commits to upholding these data protection standards. Further information can be obtained from the provider at the following link: <a href=\"https://www.dataprivacyframework.gov/participant/4452\" target=\"_blank\">https://www.dataprivacyframework.gov/participant/4452/ </a>."
+        },
+        {
+          "subtitle": "Instagram",
+          "content": "Functions of the Instagram service are integrated into this website, offered by Meta Platforms Ireland Limited, Dublin, Ireland. <br><br>When the social media element is active, a direct connection is established between your device and the Instagram server. If you are logged into your Instagram account, you can link the content of this website to your profile by clicking the Instagram button. We, as the provider, have no knowledge of the content of the transmitted data or its use by Instagram. <br><br>Joint Responsibility: We and Meta Platforms Ireland Ltd. are jointly responsible for the collection and transfer of your data (Art. 26 GDPR). The details of our obligations are set out in Meta's Controller Addendum. <br><br>Legal Basis & Transfer: The use of this service is based on your consent (Art. 6 (1) (a) GDPR and § 25 (1) TDDDG). Data transfer to the USA is based on the Standard Contractual Clauses of the EU Commission. Meta is also certified under the EU-US Data Privacy Framework (DPF). For more information, see Instagram's privacy policy:<br> <a href=\"https://privacycenter.instagram.com/policy/\" target=\"_blank\">https://privacycenter.instagram.com/policy/</a>."
+        }
+      ]
+    },
+    {
+      "number": "5",
+      "title": "Analysis Tools and Advertising",
+      "blocks": [
+        {
+          "subtitle": "IONOS WebAnalytics",
+          "content": "This website uses the analytical services of IONOS WebAnalytics (hereinafter: IONOS). The provider is 1&1 IONOS SE, Elgendorfer Straße 57, D – 56410 Montabaur, Germany. Within the scope of analyses with IONOS, data such as visitor numbers and behavior (e.g., number of page views, duration of a website visit, bounce rates), visitor sources (i.e., from which site the visitor originated), visitor locations, and technical data (browser and operating system versions) may be analyzed. For this purpose, IONOS stores the following data in particular:<br><br> •Referrer (previously visited website)<br> •Requested website or file<br> •Browser type and browser version<br> •Operating system used<br>•Device type used<br> •Time of access<br> •IP address in anonymized form (used only to determine the location of access)<br><br>According to IONOS, data collection is fully anonymized so that it cannot be traced back to individual persons. IONOS WebAnalytics does not store any cookies.<br><br>The storage and analysis of data are based on Art. 6 (1) (f) GDPR. The website operator has a legitimate interest in the statistical analysis of user behavior in order to optimize both its website and its advertising. If a corresponding consent was requested, the processing is carried out exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, insofar as the consent includes the storage of cookies or access to information in the user’s terminal device (e.g., device fingerprinting) within the meaning of the TDDDG. Consent may be revoked at any time.<br><br>For further information on data collection and processing by IONOS WebAnalytics, please refer to the IONOS privacy policy at the following link: <a href=\"https://www.ionos.de/terms-gtc/datenschutzerklaerung/  \" target=\"_blank\">https://www.ionos.de/terms-gtc/datenschutzerklaerung/ </a>. <br><br><strong>Data Processing Agreement</strong><br>We have entered into a Data Processing Agreement (DPA) for the use of the aforementioned service. This is a contract required by data protection law, which ensures that the provider processes the personal data of our website visitors only in accordance with our instructions and in compliance with the GDPR."
+        },
+        {
+          "subtitle": "WP Statistics",
+          "content": "This website uses the analytical tool WP Statistics to statistically evaluate visitor access. The provider is Veronalabs, Tatari 64, 10134, Tallinn, Estonia  <a href=\"https://veronalabs.com \" target=\"_blank\">https://veronalabs.com</a><br><br>With WP Statistics, we can analyze the use of our website. In doing so, WP Statistics records, among other things, log files (IP address, referrer, browser used, user origin, search engine used) and actions taken by website visitors on the page (e.g., clicks and views).<br><br>The data collected with WP Statistics is stored exclusively on our own server. The use of this analysis tool is based on Art. 6 (1) (f) GDPR. We have a legitimate interest in the anonymized analysis of user behavior in order to optimize both our website and our advertising. If a corresponding consent was requested, processing occurs exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, insofar as the consent includes the storage of cookies or access to information in the user's terminal device (e.g., device fingerprinting) within the meaning of the TDDDG. Consent may be revoked at any time.<br><br><strong>IP Anonymization</strong><br>We use WP Statistics with an anonymized IP. Your IP address is shortened during this process so that it can no longer be directly assigned to you."
+        }
+      ]
+    },
+    {
+      "number": "6",
+      "title": "Plugins and Tools",
+      "blocks": [
+        {
+          "subtitle": "YouTube with Enhanced Privacy",
+          "content": "Our website embeds videos from YouTube (provided by Google Ireland Limited). To protect your privacy, we use the enhanced data protection mode. According to YouTube, this mode ensures that no cookies are set and your browsing behavior is not personalized unless you play the video. However, so-called 'Local Storage' elements are stored in your browser instead.<br>If you are logged into your YouTube account, YouTube can associate your browsing behavior directly with your personal profile. You can prevent this by logging out of your account beforehand. The use of YouTube is based on Art. 6 (1) (f) GDPR (legitimate interest in an attractive online presentation) or your consent (Art. 6 (1) (a) GDPR). For more information, please see: <a href=\"https://policies.google.com/privacy?hl=de\" target=\"_blank\">https://policies.google.com/privacy?hl=de</a>.<br><br>The company holds a certification under the 'EU-U.S. Data Privacy Framework' (DPF). The DPF is an agreement between the European Union and the USA designed to ensure compliance with European data protection standards for data processing within the United States. Every company certified under the DPF commits to upholding these data protection standards. Further information can be obtained from the provider at the following link: <a href=\"https://www.dataprivacyframework.gov/participant/5780\" target=\"_blank\">https://www.dataprivacyframework.gov/participant/5780 </a>."
+        },
+        {
+          "subtitle": "Google Fonts (Local Hosting)",
+          "content": "This site uses so-called Google Fonts, provided by Google, for the uniform display of fonts. These Google Fonts are installed locally. No connection to Google's servers takes place in this process. Further information about Google Fonts can be found at <a href=\"https://developers.google.com/fonts/faq\" target=\"_blank\">https://developers.google.com/fonts/faq </a>and in Google's Privacy Policy: <a href=\"https://policies.google.com/privacy?hl=de \" target=\"_blank\">https://policies.google.com/privacy?hl=de  </a>."
+        }
+      ]
+    }
+  ]
+}
