@@ -1,26 +1,29 @@
 {
-  "title": "Product",
-  "subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
-  "features": [
-    {
-      "id": "01",
-      "title": "AIR GAPPED INFRASTRUCTURE",
-      "desc": "We guarantee absolute data isolation through a strictly on-premise and air gapped architecture that keeps your corporate intelligence entirely within your physical control."
-    },
-    {
-      "id": "02",
-      "title": "AGIRDY AGENT#1 INTELLIGENCE LAYER",
-      "desc": "Our Agent#1 captures and structures corporate knowledge with real-time processing and evolves through an Adaptive Human Interface for a deeply personalized user experience."
-    },
-    {
-      "id": "03",
-      "title": "HIGH PERFORMANCE HARDWARE",
-      "desc": "We optimize market leading NVIDIA platforms for high performance orchestration while remaining platform agnostic to adapt seamlessly to future hardware standards."
-    },
-    {
-      "id": "04",
-      "title": "INTEGRATED KNOWLEDGE AUTONOMY",
-      "desc": "The system transforms fragmented data silos into a coherent corporate memory that empowers your organization to act with a single collective consciousness."
-    }
-  ]
+"title": "PRODUCT",
+"subtitle": "We build the physical and digital backbone for your organization. This air gapped architecture ensures your unique knowledge remains under your total control.",
+"imageCardTitle": "AGIRDY AGENT #1",
+"imageCardSubtitle": "POWERED BY AGIRDY INFERENCER",
+"imageCardDesc": "The AGIRDY Agent#1 powered by AGIRDY Inferencer translates the vision of a central AI mind into reality. Our AGIRDY Inferencer operates on strictly air gapped hardware to ensure absolute data isolation while securing your unique corporate knowledge and identity for autonomous growth.",
+"features": [
+{
+"id": "01",
+"title": "AIR GAPPED INFRASTRUCTURE",
+"desc": "We guarantee absolute data isolation through a strictly on-premise and air gapped architecture that keeps your corporate intelligence entirely within your physical control."
+},
+{
+"id": "02",
+"title": "AGIRDY AGENT#1 INTELLIGENCE LAYER",
+"desc": "Our Agent#1 captures and structures corporate knowledge with real-time processing and evolves through an Adaptive Human Interface for a deeply personalized user experience."
+},
+{
+"id": "03",
+"title": "HIGH PERFORMANCE HARDWARE",
+"desc": "We optimize market leading NVIDIA platforms for high performance orchestration while remaining platform agnostic to adapt seamlessly to future hardware standards."
+},
+{
+"id": "04",
+"title": "INTEGRATED KNOWLEDGE AUTONOMY",
+"desc": "The system transforms fragmented data silos into a coherent corporate memory that empowers your organization to act with a single collective consciousness."
+}
+]
 }

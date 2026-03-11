@@ -33,6 +33,12 @@ const { person, lang, backText, headerTitle } = Astro.props;
 <Layout title={`${person.name} | AGIRDY`} lang={lang}>
   <div class="agi-detail-page">
     
+    <div class="bg-layer">
+      <div class="fixed-bg-img"></div>
+      <div class="vignette"></div>
+      <canvas id="neural-canvas"></canvas>
+    </div>
+
     <div class="container identity-section">
       <a href={lang === 'en' ? `/#who-we-are` : `/de/#who-we-are`} class="back-link">
         <span class="arrow">←</span> {backText}
@@ -50,23 +56,33 @@ const { person, lang, backText, headerTitle } = Astro.props;
           </header>
           
           <div class="profile-text-content">
-            <div class="card-desc" style="font-size: 1.2rem; margin-bottom: 1rem;" set:html={person.bio} />
-            <div class="card-desc" set:html={person.mehrInfo} />
+            <div class="card-desc" style="font-size: 1.2rem; margin-bottom: 2rem;" set:html={person.bio} />
+            
+            {person.points && (
+              <ul class="bio-points-list">
+                {person.points.map((point) => (
+                  <li class="card-desc" style="font-size: 1.2rem;">{point}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
     </div>
 
+    <section class="experience-roadmap">
+      <div class="container">
+        <h2 class="section-title centered-header">{headerTitle}</h2>
+      </div>
 
       <div class="roadmap-horizontal-wrapper">
-        <div class="roadmap-scroll-area">s
+        <div class="roadmap-scroll-area">
           <div class="roadmap-track">
             <div class="main-axis"></div>
             
             <div class="steps-grid">
               {person.timeline && person.timeline.map((item, index) => (
                 <div class={`step-node ${index % 2 === 0 ? 'is-top' : 'is-bottom'}`}>
-                  
                   <div class="phase-outline">0{index + 1}</div>
 
                   <div class="card roadmap-step-card">
@@ -83,7 +99,6 @@ const { person, lang, backText, headerTitle } = Astro.props;
                       {index + 1}
                     </div>
                   </div>
-
                 </div>
               ))}
             </div>
@@ -94,16 +109,146 @@ const { person, lang, backText, headerTitle } = Astro.props;
   </div>
 </Layout>
 
+<script>
+  // NEURAL NETWORK LOGIK (Reduzierte Form)
+  const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  let dots: any[] = [];
+  const mouse = { x: -100, y: -100 };
+
+  function resize() {
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  class Dot {
+    x: number; y: number; vx: number; vy: number; radius: number;
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.3; // Langsamere Bewegung
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.radius = Math.random() * 1.5 + 0.5; // Kleinere Punkte
+    }
+    update() {
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      this.x += this.vx;
+      this.y += this.vy;
+    }
+    draw() {
+      if (!ctx) return;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(173, 255, 47, 0.4)'; // Reduzierte Deckkraft der Punkte
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    dots = [];
+    // Geringere Dichte: Teiler auf 35000 erhöht (weniger Punkte als in Hero)
+    const count = (canvas.width * canvas.height) / 35000; 
+    for (let i = 0; i < count; i++) {
+      dots.push(new Dot());
+    }
+  }
+
+  function animate() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < dots.length; i++) {
+      const d1 = dots[i];
+      d1.update();
+      d1.draw();
+      for (let j = i + 1; j < dots.length; j++) {
+        const d2 = dots[j];
+        const dist = Math.hypot(d1.x - d2.x, d1.y - d2.y);
+        if (dist < 120) { // Kürzerer Verbindungsradius
+          ctx.beginPath();
+          ctx.moveTo(d1.x, d1.y);
+          ctx.lineTo(d2.x, d2.y);
+          ctx.strokeStyle = `rgba(173, 255, 47, ${0.3 * (1 - dist / 120)})`; // Reduzierte Linienstärke
+          ctx.lineWidth = 0.3;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  animate();
+</script>
+
 <style>
-  .agi-detail-page { padding-top: 140px; padding-bottom: 120px; overflow-x: hidden; }
-  .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+  /* HINTERGRUND-STILE */
+  .agi-detail-page { 
+    position: relative; 
+    background-color: #0a0f14; 
+    padding-top: 140px; 
+    padding-bottom: 120px; 
+    overflow-x: hidden; 
+  }
+
+  .bg-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .fixed-bg-img {
+    position: fixed;
+    inset: 0;
+    background-image: url('/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Reduzierte Deckkraft des Hintergrundbildes */
+    z-index: -1;
+  }
+
+  #neural-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .vignette {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to right, #0a0f14 20%, transparent 80%),
+                radial-gradient(circle, transparent 10%, #0a0f14 95%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* BESTEHENDE STILE UNVERÄNDERT */
+  .container { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+  .centered-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+  }
 
   .back-link { 
     font-family: 'Bebas Neue', sans-serif; 
     color: var(--accent); 
     text-decoration: none; 
     font-size: 1.1rem; 
-    letter-spacing: 2px; 
+    letter-spacing: 2px;
     display: inline-flex; 
     align-items: center; 
     margin-bottom: 4rem; 
@@ -112,9 +257,31 @@ const { person, lang, backText, headerTitle } = Astro.props;
   .back-link:hover { transform: translateX(-8px); }
   .arrow { margin-right: 8px; }
 
-  /* --- PROFILE HEADER STYLING --- */
+  .bio-points-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bio-points-list li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .bio-points-list li::before {
+    content: "•";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    top: -2px;
+  }
+
   .profile-intro { 
-    display: grid; 
+    display: grid;
     grid-template-columns: 350px 1fr; 
     gap: 80px; 
     margin-bottom: 100px; 
@@ -122,46 +289,76 @@ const { person, lang, backText, headerTitle } = Astro.props;
   }
   
   .image-frame { 
-    position: relative; 
+    position: relative;
     width: 100%; 
     border-radius: var(--radius); 
     overflow: hidden; 
     border: 1px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6); 
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
   }
   .profile-img { width: 100%; display: block; }
-
   .profile-text-content { max-width: 850px; }
 
-  /* --- ROADMAP-STYLE CSS (Unverändert für Konsistenz) --- */
-  .experience-roadmap { position: relative; padding: 60px 0; z-index: 10; border-top: 1px solid rgba(255,255,255,0.05); }
+  .experience-roadmap { position: relative; padding: 80px 0; z-index: 10; border-top: 1px solid rgba(255,255,255,0.05); }
   .roadmap-horizontal-wrapper { width: 100%; overflow-x: auto; padding: 40px 0; scrollbar-width: none; }
   .roadmap-horizontal-wrapper::-webkit-scrollbar { display: none; }
-  .roadmap-track { position: relative; min-width: 1300px; height: 750px; display: flex; align-items: center; }
+  
+  .roadmap-track { position: relative; min-width: 1600px; height: 800px; display: flex; align-items: center; }
+  
   .main-axis {
     position: absolute; top: 50%; left: 0; right: 0; height: 2px;
-    background: var(--accent); box-shadow: 0 0 15px var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
     transform: translateY(-50%); z-index: 5;
     mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   }
-  .steps-grid { display: flex; justify-content: space-around; width: 100%; max-width: 1500px; margin: 0 auto; height: 100%; align-items: center; }
-  .step-node { position: relative; width: 340px; height: 100%; display: flex; flex-direction: column; align-items: center; }
-  .is-top { justify-content: flex-start; padding-top: 20px; }
-  .is-bottom { justify-content: flex-end; padding-bottom: 20px; }
-  .roadmap-step-card { width: 340px; flex: none !important; height: auto !important; padding: 2.2rem; z-index: 20; background: rgba(17, 24, 31, 0.7) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-  .node-connection { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; pointer-events: none; }
+
+  .steps-grid { display: flex; justify-content: space-around; width: 100%; max-width: 1800px; margin: 0 auto; height: 100%; align-items: center; gap: 40px; }
+  
+  .step-node { position: relative; width: 380px; height: 100%; display: flex; flex-direction: column; align-items: center; }
+  .is-top { justify-content: flex-start; padding-top: 40px; }
+  .is-bottom { justify-content: flex-end; padding-bottom: 40px; }
+  
+  .roadmap-step-card { 
+    width: 100%; flex: none !important; height: auto !important; padding: 2.5rem; z-index: 20; 
+    background: rgba(17, 24, 31, 0.7) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+  }
+  .roadmap-step-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+  .node-connection { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 50px; height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    z-index: 10; pointer-events: none; 
+  }
   .connection-line { width: 1px; background: var(--accent); height: 100%; }
   .is-top .node-connection { justify-content: flex-end; transform: translate(-50%, -100%); top: 50%; }
   .is-top .connection-line { background: linear-gradient(to top, var(--accent), transparent); }
   .is-bottom .node-connection { justify-content: flex-start; transform: translate(-50%, 0%); top: 50%; }
   .is-bottom .connection-line { background: linear-gradient(to bottom, var(--accent), transparent); }
-  .roadmap-feature-badge { width: 50px; height: 50px; background: var(--accent); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; font-weight: bold; z-index: 15; box-shadow: 0 0 20px rgba(173, 255, 47, 0.4); position: absolute; bottom: -25px; }
+
+  .roadmap-feature-badge { 
+    width: 50px; height: 50px; background: var(--accent); color: #000; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; 
+    font-size: 1.5rem; font-weight: bold; z-index: 15; box-shadow: 0 0 20px rgba(173, 255, 47, 0.4); 
+    position: absolute; bottom: -25px; 
+  }
   .is-bottom .roadmap-feature-badge { bottom: auto; top: -25px; }
-  .phase-outline { position: absolute; font-family: 'Archivo Black', sans-serif; font-size: 10rem; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); z-index: 1; top: 50%; transform: translateY(-50%); }
+
+  .phase-outline { 
+    position: absolute; font-family: 'Archivo Black', sans-serif; font-size: 11rem; color: transparent; 
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); z-index: 1; top: 50%; transform: translateY(-50%); 
+  }
 
   @media (max-width: 1024px) {
-    .profile-intro { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .centered-header {
+    text-align: left; /* Überschreibt das globale text-align: center */
+    margin-left: 0;
+    padding-left: 0;
+  }
+    .profile-intro { grid-template-columns: 1fr; text-align: left; gap: 40px; }
     .roadmap-track { min-width: 100%; height: auto; display: block; }
     .main-axis, .node-connection, .phase-outline { display: none !important; }
     .steps-grid { flex-direction: column; gap: 3rem; align-items: center; padding: 0 5%; width: 100%; }

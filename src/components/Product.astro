@@ -7,116 +7,205 @@ if (!productData) {
 }
 ---
 
-<section class="what-we-do" id="product">
+<section class="product-section" id="product">
   <div class="container">
     
     <div class="title-row">
-      <h2 class="section-title">{productData?.title || "AGIRDY CORE"}</h2>
-      <p class="section-title-sub">{productData?.subtitle || "The Intelligence Infrastructure"}</p>
+      <h2 class="section-title">{productData?.title || "PRODUCT"}</h2>
+      <p class="section-title-sub">{productData?.subtitle}</p>
     </div>
 
-    <div class="product-layout-master">
-      
-      <div class="product-image-frame">
-        <div class="image-wrapper">
-          <img src="/product-brain.jpg" alt="Agirdy Core Visual" class="main-img" />
-          <div class="vignette-overlay"></div>
+    <div class="slider-wrapper">
+      <div class="slider-container" id="productSlider">
+        
+        <div class="card product-card image-card">
+          <div class="feature-id">CORE</div>
+          
+          <div class="card-content">
+            <div class="image-inner-frame">
+              <img src="/product-brain.jpg" alt="Agirdy Core Visual" class="main-img" />
+              <div class="vignette-overlay"></div>
+            </div>
+            
+            <div class="card-header">
+              <h3 class="card-title">{productData?.imageCardTitle}</h3>
+              <p class="card-subtitle">{productData?.imageCardSubtitle}</p>
+            </div>
+
+            <div class="card-body">
+              <p class="card-desc">{productData?.imageCardDesc}</p>
+            </div>
+          </div>
           <div class="image-glow"></div>
+        </div>
+
+        <div class="features-scroll-track">
+          {productData?.features?.map((item) => (
+            <div class="card product-card feature-card">
+              <div class="feature-id">{item.id}</div>
+              
+              <div class="card-content">
+                <div class="card-header">
+                  <h3 class="card-title">{item.title}</h3>
+                </div>
+                
+                <div class="card-body">
+                  <p class="card-desc">{item.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div class="product-cards-stack">
-        {productData?.features?.map((item) => (
-          <div class="card feature-horizontal-card">
-            <div class="feature-badge">{item.id}</div>
-            
-            <div class="card-inner-content">
-              <div class="card-title-box">
-                <h3 class="card-title feature-card-title">{item.title}</h3>
-              </div>
-              
-              <div class="card-divider"></div>
-              
-              <div class="card-desc-box">
-                <p class="card-desc feature-card-desc">{item.desc}</p>
-              </div>
-            </div>
+      <div class="slider-vignette-right"></div>
 
-            <div class="accent-bar"></div>
-          </div>
-        ))}
+      <div class="slider-nav">
+        <button class="nav-btn" id="prevBtn" aria-label="Zurück">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path fill="var(--accent)" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Weiter">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path fill="var(--accent)" d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
       </div>
-
     </div>
   </div>
 </section>
 
+<script>
+  const slider = document.getElementById('productSlider');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  if (slider && prevBtn && nextBtn) {
+    const handleScroll = (direction) => {
+      const card = slider.querySelector('.feature-card');
+      if (!card) return;
+
+      // Breite einer Karte + Gap (30px)
+      const scrollAmount = card.getBoundingClientRect().width + 30;
+
+      // 1. Snapping kurz ausschalten für flüssige JS-Animation
+      slider.style.scrollSnapType = 'none';
+
+      // 2. Scrollen
+      slider.scrollBy({
+        left: direction === 'next' ? scrollAmount : -scrollAmount,
+        behavior: 'smooth'
+      });
+
+      // 3. Snapping nach der Animation wieder aktivieren
+      // Das verhindert, dass die Karte "steckenbleibt"
+      let isScrolling;
+      slider.addEventListener('scroll', () => {
+        window.clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+          slider.style.scrollSnapType = 'x mandatory';
+        }, 150); // Sobald der Scrollvorgang stoppt
+      }, { once: true });
+    };
+
+    nextBtn.addEventListener('click', () => handleScroll('next'));
+    prevBtn.addEventListener('click', () => handleScroll('prev'));
+  }
+</script>
+
 <style>
-  /* --- BASIS STYLES --- */
-  .what-we-do {
+  /* Dein Design bleibt exakt wie im Ursprung */
+  .product-section {
     position: relative;
     padding: 120px 0;
     background: transparent;
     width: 100%;
     overflow: hidden;
-    z-index: 10; 
-   
+    z-index: 5;
   }
 
   .container {
-    width: 100%;
-    position: relative;
-    z-index: 15;
-  }
-
-.feature-card-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.0rem;
-    color: var(--text);
-    text-transform: uppercase;
-    
-    /* 1. ZEILENABSTAND (Innerhalb des Titels, falls zweizeilig) */
-    line-height: 1.3; 
-
-    /* 2. ABSTAND ZUM NÄCHSTEN ELEMENT (Nach unten) */
-    margin: 0;
-    margin-bottom: 0.2rem; /* Hier kannst du den Wert feinjustieren */
-    
-    padding: 0;
-    letter-spacing: 1px;
-  }
-
-  /* --- LAYOUT MASTER --- */
-  .product-layout-master {
-    position: relative;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
-    min-height: 600px;
-    z-index: 20;
+    padding: 0 5%;
   }
 
-  /* BILD EBENE */
-  .product-image-frame {
+  .slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: -50px;
+  }
+
+  .slider-vignette-right {
     position: absolute;
-    left: 0; 
     top: 0;
-    bottom: 0;
-    width: 55%; 
-    z-index: 1;
+    right: -2px;
+    height: calc(100% - 80px);
+    width: 150px;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    z-index: 12;
     pointer-events: none;
   }
 
-  .image-wrapper {
+  .slider-container {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 20px 0 40px 0;
+    -ms-overflow-style: none;
+    cursor: grab;
+    align-items: stretch; 
+    position: relative;
+    z-index: 5;
+  }
+
+  .slider-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-card {
+    scroll-snap-align: start;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .feature-card {
+    flex: 0 0 420px; 
+    min-height: 520px; 
+    height: auto;
+    margin: auto 0; 
+  }
+
+  .image-card {
+    flex: 0 0 500px;
+    min-height: 620px;
+    height: auto;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 15, 21, 0.98);
+    backdrop-filter: blur(25px);
+    box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .features-scroll-track {
+    display: flex;
+    gap: 30px;
+    align-items: stretch; 
+  }
+
+  .image-inner-frame {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 220px;
+    border-radius: 20px;
     overflow: hidden;
-    border-radius: 40px;
+    margin-bottom: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -124,129 +213,123 @@ if (!productData) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    object-position: 140%;
+    opacity: 0.8;
   }
 
   .vignette-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to left, 
-      rgba(10, 15, 20, 1) 0%, 
-      rgba(10, 15, 20, 0.8) 35%, 
-      transparent 80%
-    );
+    background: linear-gradient(to top, rgba(10, 15, 20, 0.8) 0%, transparent 100%);
+  }
+
+  .feature-id {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--accent);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
     z-index: 2;
+  }
+
+  .card-header {
+    margin-bottom: 1.5rem;
+    z-index: 2;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .card-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+  }
+
+  .card-body {
+    margin-top: 1rem;
+    z-index: 2;
+  }
+
+  .card-desc {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
   }
 
   .image-glow {
     position: absolute;
     top: 50%;
-    left: 20%;
-    width: 60%;
-    height: 60%;
-    background: var(--accent);
-    filter: blur(120px);
-    opacity: 0.15;
-    z-index: -1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(173, 255, 47, 0.03) 0%, transparent 70%);
+    pointer-events: none;
   }
 
-  /* KARTEN EBENE - Angepasst an globale .card */
-  .product-cards-stack {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 850px;
+  .slider-nav {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-left: 35%;
-  }
-
-  .feature-horizontal-card {
-    /* Die meisten Styles kommen nun aus .card in global.css */
-    padding: 2.5rem 3.5rem;
-    align-items: center;
-    box-shadow: -30px 20px 60px rgba(0, 0, 0, 0.6);
-  }
-
-  .card-inner-content {
-    display: grid;
-    grid-template-columns: 0.7fr 1px 1.3fr;
-    gap: 3rem;
-    align-items: center;
-    width: 100%;
-  }
-
-  .feature-badge {
+    gap: 15px;
     position: absolute;
-    left: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: var(--accent); 
-    color: #000;
+    left: 240px; 
+    bottom: 40px; 
+    width: 420px; 
+    justify-content: flex-end; 
+    z-index: 20;
+  }
+
+  .nav-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--accent); 
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    z-index: 11;
+    cursor: pointer;
+    transition: var(--transition);
   }
 
-  /* Spezifische Overrides für die horizontale Produktkarte */
-  .feature-card-title {
-    font-size: 1.8rem; /* Etwas kleiner für das horizontale Layout */
-    margin: 0;
-  }
+  .nav-btn svg path { fill: var(--accent); }
 
-  .card-divider {
-    width: 1px;
-    height: 60px;
-    background: var(--accent); 
-    opacity: 0.4;
-  }
-
-  .feature-card-desc {
-    margin: 0;
-  }
-
-  .accent-bar {
-    position: absolute;
-    bottom: 0;
-    left: 40px;
-    right: 40px;
-    width: 0;
-    height: 3px;
+  .nav-btn:hover {
     background: var(--accent);
-    transition: width 0.5s ease;
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+  
+  .nav-btn:hover svg path { fill: #000; }
+
+  @media (max-width: 1024px) {
+    .slider-vignette-right { display: none; }
+    .image-card { position: relative; flex: 0 0 100%; box-shadow: none; border-right: none; }
+    .feature-card { flex: 0 0 85%; }
   }
 
-
-  /* RESPONSIVE */
-  @media (max-width: 1100px) {
-    .product-layout-master {
-      flex-direction: column;
-      max-width: 100%;
-      min-height: auto;
-    }
-    .product-image-frame {
-      position: relative;
-      width: 100%;
-      height: 350px;
-      margin-bottom: 2rem;
-    }
-    .product-cards-stack {
-      width: 100%;
-      max-width: 950px;
-      margin-left: 0%;
-    }
-    .card-inner-content { grid-template-columns: 1fr; gap: 1rem; }
-    .card-divider { display: none; }
-    .feature-badge { left: 10px; top: -25px; transform: none; }
+  @media (max-width: 768px) {
+    .slider-container { flex-direction: column; overflow-x: visible; scroll-snap-type: none; gap: 20px; }
+    .features-scroll-track { flex-direction: column; gap: 20px; width: 100%; }
+    .image-card, .feature-card { flex: 0 0 auto; width: 100%; min-height: auto; scroll-snap-align: none; }
+    .slider-nav { display: none; }
+    .product-card { padding: 2rem; }
+    .card-title { font-size: 2.2rem; }
   }
 </style>

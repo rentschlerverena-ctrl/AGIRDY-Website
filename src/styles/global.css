@@ -111,8 +111,9 @@ p {
 
 .title-row {
   width: 100%;
-  padding-left: 15%; /* Dein gewünschter Versatz */
+  padding-left: 0%; /* Dein gewünschter Versatz */
   margin-bottom: 5rem;
+  text-align: center; /* Titel und Untertitel zentralisiert */
   
 }
 
@@ -135,13 +136,20 @@ p {
 }
 
 .section-title-sub {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-top: 0.5rem;
+  /* Stil angepasst an Intro.astro (.philosophy-statement-lato) */
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
+  color: #fff;
+  text-transform: none; /* Keine Großbuchstaben mehr für Intro-Look */
+  margin-top: 1rem;
+  max-width: 800px;
+  line-height: 1.4;
   opacity: 0.9;
+  text-align: center;
+  margin-inline: auto; /* Zentriert den Block selbst, wenn max-width aktiv ist */
 }
 
 /* =========================

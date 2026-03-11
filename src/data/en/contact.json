@@ -1,14 +1,14 @@
 {
   "title": "Contact",
-  "subtitle": "Let's talk.",
-  "cardTitle": "Are you  AGIRDY?",
+  "subtitle": "An open exchange on your questions and challanges marks the starting point to become AGIRDY™.",
+  "cardTitle": "Are you AGIRDY™?",
   "cardSubtitle": "Get AGI Ready with us",
-  "description": "An open exchange on your questions and challanges marks the starting point to become AGIRDY.",
-  "email": "p.feindert@googlemail.com",
+  "description": "Share your challanges with us and we help to become AGIRDY™.",
+  "email": "mail@agirdy.com",
   "buttonText": "Contact",
   "socials": [
-    { "platform": "LinkedIn", "url": "https://linkedin.com/in/deinname" },
-    { "platform": "Instagram", "url": "https://instagram.com/deinname" },
-    { "platform": "Twitter", "url": "https://instagram.com/deinname" }
+    { "platform": "LinkedIn", "url": "https://www.linkedin.com/company/agirdy/" },
+    { "platform": "Instagram", "url": "https://www.instagram.com/agi.rdy?igsh=cTRvZXdmODM1dzJt" },
+    { "platform": "Twitter", "url": "https://x.com/agi_rdy" }
   ]
 }

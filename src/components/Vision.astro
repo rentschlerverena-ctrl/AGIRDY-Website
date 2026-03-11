@@ -11,51 +11,57 @@ if (!visionData) {
   <div class="container">
     
     <div class="title-row">
-        <h2 class="section-title">{visionData.title}</h2>
-        <p class="section-title-sub">{visionData.subtitle}</p>
+        <h2 class="section-title">{visionData?.title}</h2>
+        <p class="section-title-sub">{visionData?.subtitle}</p>
     </div>
 
     <div class="services-grid">
       
       <div class="card service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        
-        <div class="card-header">
-          <h3 class="card-title">{visionData?.vision?.label || "VISION"}</h3>
-          <p class="card-subtitle">The Future</p>
-        </div>
+        <div class="service-content-wrapper">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          
+          <div class="card-header">
+            <h3 class="card-title">{visionData?.vision?.label || "VISION"}</h3>
+            <p class="card-subtitle">The Future</p>
+          </div>
 
-        <p class="card-desc">{visionData?.vision?.text}</p>
+          <p class="card-desc">{visionData?.vision?.text}</p>
+        </div>
         <div class="accent-bar"></div>
       </div>
 
       <div class="card service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        </div>
-        
-        <div class="card-header">
-          <h3 class="card-title">{visionData?.mission?.label || "MISSION"}</h3>
-          <p class="card-subtitle">The Path</p>
-        </div>
+        <div class="service-content-wrapper">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          
+          <div class="card-header">
+            <h3 class="card-title">{visionData?.mission?.label || "MISSION"}</h3>
+            <p class="card-subtitle">The Path</p>
+          </div>
 
-        <p class="card-desc">{visionData?.mission?.text}</p>
+          <p class="card-desc">{visionData?.mission?.text}</p>
+        </div>
         <div class="accent-bar"></div>
       </div>
 
       <div class="card service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        
-        <div class="card-header">
-          <h3 class="card-title">{visionData?.values?.label || "VALUES"}</h3>
-          <p class="card-subtitle">Our Core</p>
-        </div>
+        <div class="service-content-wrapper">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          
+          <div class="card-header">
+            <h3 class="card-title">{visionData?.values?.label || "VALUES"}</h3>
+            <p class="card-subtitle">Our Core</p>
+          </div>
 
-        <p class="card-desc">{visionData?.values?.text}</p>
+          <p class="card-desc">{visionData?.values?.text}</p>
+        </div>
         <div class="accent-bar"></div>
       </div>
 
@@ -80,13 +86,12 @@ if (!visionData) {
     z-index: 25;
   }
 
-  /* Grid Layout bleibt spezifisch */
   .services-grid {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    align-items: stretch;
+    align-items: stretch; /* Zwingt alle Karten im Grid auf die gleiche Höhe */
     gap: 2.5rem;
     padding: 0 10%;
     max-width: 1600px;
@@ -96,7 +101,25 @@ if (!visionData) {
   .service-card {
     flex: 1;
     min-width: 300px;
-    /* Die Basis-Card Styles kommen nun aus der global.css */
+    display: flex; /* Karte selbst wird zum Flex-Container */
+    flex-direction: column;
+    position: relative;
+    background: rgba(17, 24, 31, 0.7); /* Hintergrund direkt auf der Karte */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2.5rem;
+    height: auto; /* Erlaubt stretch zu wirken */
+  }
+
+  .service-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Füllt die gesamte gestreckte Höhe der Karte aus */
+  }
+
+  .card-desc {
+    flex-grow: 1; /* Drückt den Textinhalt auseinander, damit alle Karten am Ende bündig sind */
+    margin-bottom: 2rem;
   }
 
   .service-icon {
@@ -105,17 +128,6 @@ if (!visionData) {
     display: flex;
     align-items: center;
   }
-
-  /* Akzent-Linie am Boden als lokales Feature */
-  .accent-bar {
-    position: absolute;
-    bottom: 0;
-    left: 2.5rem;
-    width: 0;
-    height: 3px;
-    background: var(--accent);
-    transition: width 0.4s ease;
-  }*/
 
   .service-card:hover .accent-bar {
     width: calc(100% - 5rem);

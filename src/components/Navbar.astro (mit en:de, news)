@@ -1,6 +1,6 @@
 ---
 /* src/components/Navbar.astro */
-const { lang = 'en' } = Astro.props;
+const { lang = 'en' } = Astro.props; 
 const homePath = lang === 'en' ? '/' : '/de';
 const targetPath = lang === 'en' ? '/de' : '/';
 ---
@@ -24,13 +24,10 @@ const targetPath = lang === 'en' ? '/de' : '/';
           <span class="chevron">▾</span>
         </div>
         <ul class="dropdown-menu">
-          <li><a href={`${homePath}#product`}>AGIRDY Inferencer</a></li>
-          <li><a href={`${homePath}#product`}>AGIRDY Agent #1</a></li>
           <li><a href={`${homePath}#roadmap`}>ROADMAP</a></li>
         </ul>
       </li>
 
-      {/* NEWS BUTTON DEAKTIVIERT 
       <li class="dropdown">
         <div class="dropdown-trigger-wrapper">
           <a href="#">{lang === 'en' ? 'NEWS' : 'AKTUELLES'}</a>
@@ -41,7 +38,6 @@ const targetPath = lang === 'en' ? '/de' : '/';
           <li><a href={`${homePath}podcast`}>PODCAST</a></li>
         </ul>
       </li>
-      */}
 
       <li>
         <a href={`${homePath}#contact`} class="nav-cta">
@@ -49,13 +45,11 @@ const targetPath = lang === 'en' ? '/de' : '/';
         </a>
       </li>
       
-      {/* SPRACHSCHALTER DEAKTIVIERT
       <li class="lang-switch-container">
         <a href={targetPath} class="lang-switch">
           {lang === 'en' ? 'DE' : 'EN'}
         </a>
       </li>
-      */}
     </ul>
 
     <div class="menu-toggle" id="mobile-menu">
@@ -158,18 +152,22 @@ const targetPath = lang === 'en' ? '/de' : '/';
     .nav-links {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: center; /* Vertikal mittig */
+      align-items: center;    /* Horizontal mittig */
+      
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      background: #0a0f14;
+      height: 100vh; /* Volle Höhe */
+      height: 100dvh; /* Nutzt dynamischen Viewport (wichtig für mobile Browser) */
+      
+      background: #0a0f14; /* 100% Deckkraft, kein Durchscheinen */
       margin: 0;
       padding: 0;
       list-style: none;
+      
+      /* Verstecken */
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -200,6 +198,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
       padding: 10px;
     }
 
+    /* Mobile Dropdown Fix */
     .dropdown-trigger-wrapper {
       justify-content: center;
       width: 100%;
@@ -218,6 +217,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
     .dropdown.open .dropdown-menu { display: block; }
     .dropdown-menu a { font-size: 1.2rem; color: #adff2f; opacity: 0.8; }
 
+    /* CTA & Sprachschalter */
     .nav-cta {
       margin-top: 15px;
       font-size: 1.4rem !important;
@@ -242,6 +242,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
     navMenu.classList.toggle('active');
     
     if (isActive) {
+      // Absoluter Scroll-Stopp für iOS und Android
       body.style.overflow = 'hidden';
       body.style.position = 'fixed';
       body.style.width = '100%';
@@ -254,6 +255,7 @@ const targetPath = lang === 'en' ? '/de' : '/';
     }
   });
 
+  // Mobile Dropdown
   document.querySelectorAll('.dropdown').forEach(dropdown => {
     dropdown.querySelector('.dropdown-trigger-wrapper').addEventListener('click', (e) => {
       if (window.innerWidth <= 1024) {
@@ -263,8 +265,10 @@ const targetPath = lang === 'en' ? '/de' : '/';
     });
   });
 
+  // Schließen bei Klick auf Link
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
+      // Nur schließen, wenn es kein Dropdown-Trigger ist
       if (window.innerWidth <= 1024 && !link.closest('.dropdown-trigger-wrapper')) {
         menuToggle.classList.remove('is-active');
         navMenu.classList.toggle('active');

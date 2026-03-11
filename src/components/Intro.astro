@@ -7,21 +7,28 @@ import backupData from '../data/en/intro.json';
 const data = propsData || backupData;
 
 if (!data) return null;
+
+// Wir vereinfachen die Funktion: Sie gibt nur den Text zurück oder 
+// erledigt minimales Markdown, falls du noch ** nutzt.
+const formatOrigin = (text) => {
+  if (!text) return '';
+  // Unterstützt weiterhin ** für Fettgedrucktes, falls gewünscht
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+};
 ---
 
 <section class="intro-section">
   <div class="container">
     
-
-<div class="scroll-indicator">
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-    <path d="M6 10L12 16L18 10" 
-      stroke="var(--accent)" 
-      stroke-width="2.5" 
-      stroke-linecap="round" 
-      stroke-linejoin="round"/>
-  </svg>
-</div>
+    <div class="scroll-indicator">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+        <path d="M6 10L12 16L18 10" 
+          stroke="var(--accent)" 
+          stroke-width="2.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+      </svg>
+    </div>
     
     <div class="brand-header">
       <h2 class="massive-title-archivo">{data.brand}</h2>
@@ -38,51 +45,60 @@ if (!data) return null;
     </div>
 
     <div class="origin-clean">
-      <div class="logo-minimal">
-        <div class="square-outline"
+      <!-- Flex-Container für Logo links und Text rechts -->
+      <div class="origin-flex-container">
+        <div class="logo-minimal">
+          <img src="/Logo_weiss.png" alt="AGIRDY Logo" class="logo-img-intro" />
+        </div>
+        <div class="text-minimal">
+          {/* set:html erlaubt es uns, Tags direkt aus der JSON zu rendern */}
+          <p class="origin-p" set:html={formatOrigin(data.origin)}></p>
         </div>
       </div>
-      <div class="text-minimal">
-        <p class="origin-p" set:html={data.origin ? data.origin.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') : ''}></p>
-      </div>
     </div>
-
   </div>
 </section>
 
 <style>
+  .intro-section {
+    margin-top: -80px; /* Weiter nach oben verschoben */
+    position: relative;
+    z-index: 10;
+    padding: 0px 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.intro-section {
-  margin-top: -120px; /* zieht alles nach oben */
-}
+  .container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
 
-/* Pulsierender Pfeil Style */
+  /* Pulsierender Pfeil Style */
   .scroll-indicator {
     display: flex;
     justify-content: center;
     margin-bottom: 100px;
     animation: pulse-arrow 2s infinite;
-    
   }
 
-@keyframes pulse-arrow {
-  0% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(14px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 0.3; }
-}
-
-.scroll-indicator svg {
-  width: 60px;
-  height: 60px;
-}
-  .intro-section {
-    position: relative;
-    z-index: 10;
-    padding:0px 0;
-    background: transparent;
+  @keyframes pulse-arrow {
+    0% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(14px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.3; }
   }
 
-  /* BRANDING: Archivo Black & Noch Größer */
+  .scroll-indicator svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* BRANDING: Archivo Black */
   .brand-header {
     text-align: center;
     margin-bottom: 40px;
@@ -90,8 +106,8 @@ if (!data) return null;
 
   .massive-title-archivo {
     font-family: 'Archivo Black', sans-serif;
-    font-size:50px;
-    letter-spacing: -2px; /* Archivo Black sieht enger gesperrt oft wuchtiger aus */
+    font-size: 50px;
+    letter-spacing: -2px;
     line-height: 0.9;
     margin: 0;
     color: var(--text);
@@ -101,79 +117,129 @@ if (!data) return null;
   .phonetic-text {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     color: var(--muted);
     letter-spacing: 2px;
     margin-top: 20px;
     display: block;
   }
 
-  
-
-
-  /* STATEMENT: Normale Lato (kein Kursiv) */
+  /* STATEMENT */
   .statement-wrap {
     max-width: 1100px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 40px auto;
     text-align: center;
     padding: 0 0px;
   }
 
   .philosophy-statement-lato {
     font-family: 'Lato', sans-serif;
-    font-weight: 100; /* Normaler Schriftschnitt */
-    font-style: normal; /* Explizit nicht kursiv */
-    font-size: 30px;
+    font-weight: 100;
+    font-style: italic;
+    font-size: 25px;
     line-height: 1.4;
     color: #fff;
     text-transform: none;
     letter-spacing: -0.5px;
-   font-style: italic;
   }
 
+  /* Accent-Farbe für das Statement oben (angepasst an Origin-Stil) */
   .highlight {
-    font-weight: 700;
+    font-family: inherit; /* Nutzt Lato wie der Rest */
+    font-weight: 700;     /* Fettgedruckt */
     color: var(--accent);
+    font-style: inherit;  /* Behält Italic bei, da es im h1-Kontext steht */
   }
 
-  /* ORIGIN CLEAN */
-
+  /* ORIGIN CLEAN MIT LOGO LINKS */
   .origin-clean {
     max-width: 1100px;
     margin: 0 auto 120px auto;
-    text-align: center;
-    padding: 0 0px;
+    padding: 0 20px;
+  }
+
+  .origin-flex-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center;
+    gap: 40px; 
+  }
+
+  .logo-minimal {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img-intro {
+    height: auto; 
+    max-height: 120px; 
+    width: auto;
+    opacity: 0.9;
+    object-fit: contain;
+  }
+
+  .text-minimal {
+    text-align: left;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .origin-p {
     font-family: 'Lato', sans-serif;
-    font-weight: 100; /* Normaler Schriftschnitt */
-    font-style: normal; /* Explizit nicht kursiv */
-    font-size: 30px;
+    font-weight: 100;
+    font-style: italic;
+    font-size: 25px;
     line-height: 1.4;
     color: #fff;
     text-transform: none;
     letter-spacing: -0.5px;
-   font-style: italic;
-   text-align: center;
+    margin: 0;
+    max-width: 700px;
+  }
+
+  /* Diese Regel greift für das Highlight im Origin-Text */
+  .origin-p :global(.highlight) {
+    color: var(--accent) !important;
+    font-family: inherit; /* Gleiche Schrift wie Rest */
+    font-weight: 700;     /* Fettgedruckt */
+    font-style: inherit;  /* Behält Italic bei */
   }
 
   @media (max-width: 850px) {
-    .origin-clean {
+    .origin-flex-container {
       flex-direction: column;
       text-align: center;
-      gap: 40px;
-      padding: 0 6%;
+      gap: 25px;
+      align-items: center;
+    }
     
+    .text-minimal {
+      text-align: center;
     }
 
-  .statement-wrap {
-   padding: 0 6%;
+    .origin-clean {
+      padding: 0 6%; 
+    }
+
+    .statement-wrap {
+      padding: 0 6%;
     }
 
     .massive-title-archivo {
       font-size: 4.5rem;
       letter-spacing: -1px;
+    }
+    
+    .logo-img-intro {
+      max-height: 60px;
+    }
+    
+    .intro-section {
+      margin-top: -120px;
     }
   }
 </style>
